@@ -5,7 +5,8 @@ const RoundedDiv = ({
     width = "257px",
     className = "",
     borderRadius = "28px",
-    children
+    children,
+    ...props
 }) => 
     {
     
@@ -20,6 +21,7 @@ const RoundedDiv = ({
         width,
         borderRadius,
     }}
+    {...props}
     >
         {children}
     </div>

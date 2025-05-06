@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import eye from "../assets/Auth/eye.svg";
 
 const InputField = ({
     variant = "grey",
@@ -8,16 +9,22 @@ const InputField = ({
     height = "40px",
     width = "250px",
     type = "text",
-    textColor = "#B6B6B6",
+    textColor = "#636363",
     fontSize = "14px",
     value = "",
     onChange = () => {},
     onKeyDown = () => {},
     ref = null,
+    id = null,
+    labelName = null,
+    compulsory = false,
+    labelClassName = "",
+    ...props
 }) => {
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     const variants = {
-        grey: "border-[#939393] border",
+        grey: "border-[#D8D8D8] border",
         red: "border-[#AE1F25] border"
     };
 
@@ -27,28 +34,49 @@ const InputField = ({
         10: `border-[10px]`,
     };
 
-    const baseStyle = `p-5 rounded-md font-inter font-semibold box-border`
-
+    const baseStyle = `p-5 rounded-md font-inter font-semibold box-border shadow-[0_1px_2px_0_#1018280D]`
 
     const inputStyle = {
-        border: `${borderWidth} solid`,
         height: height,
         width: width,
         color: textColor,
         fontSize: fontSize,
     };
 
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
+    const inputType = type === "password" ? (passwordVisible ? "text" : "password") : type;
+
     return (
-        <input
-            type = {type}
-            style={inputStyle}
-            className={`${baseStyle} ${variants[variant]} ${className} ${borderStyle[borderWidth]}`}
-            placeholder = {placeholder}
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            ref={ref}
-        />
+        <>
+            {labelName && <label htmlFor={id} className={`font-medium ${labelClassName}`}>{labelName}{compulsory && <span className='text-red-500'>*</span>}</label>}
+            <div className="relative">
+                <input
+                    type={inputType}
+                    style={inputStyle}
+                    className={`${baseStyle} ${variants[variant]} ${className} ${type === "password" ? "pr-10" : ""}`}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    ref={ref}
+                    {...props}
+                    id={id}
+                />
+                {type === "password" && (
+                    <button
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                        aria-label={passwordVisible ? "Hide password" : "Show password"}
+                    >
+                        <img src={eye} alt="Toggle password visibility" />
+                    </button>
+                )}
+            </div>
+        </>
     );
 }
 

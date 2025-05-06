@@ -2,8 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import RoundedDiv from '../../components/RoundedDiv';
 import CustomMainButton from '../../components/Custom_Main_Button';
 import { Link, useNavigate } from 'react-router';
-import AuthLayout from '../../layouts/AuthLayout';
+import ResetLayout from '../../layouts/ResetLayout';
 import VerifyCodeHero from "../../assets/Auth/VerifyHero.png";
+import Logo from "../../assets/Auth/Logo.png";
+import { toast } from 'react-toastify';
 
 function VerifyCode() {
   const [code, setCode] = useState(['', '', '', '']);
@@ -32,7 +34,10 @@ function VerifyCode() {
 
   const handleContinue = () => {
     if (code.every(digit => digit !== '')) {
-      navigate('/reset-password');
+      navigate('/reset-password', { state: { code: code.join('') } });      
+    }
+    else {
+      toast.error('Please enter all digits of the code.');
     }
   };
 
@@ -41,18 +46,21 @@ function VerifyCode() {
   }, []);
 
   return (
-    <AuthLayout>
+    <ResetLayout
+      animation={VerifyCodeHero}>
       <div className='flex flex-col justify-center items-center h-full w-full'>
 
-        <div className='mb-8'>
-                    <img src={VerifyCodeHero} alt="" />
-                </div>
         <RoundedDiv
           height="auto"
           width="90%"
           className='max-w-md py-10 px-6 flex flex-col gap-4'
         >
-          <h2 className='text-center text-xl font-semibold mb-2'>Enter 4 Digits Code</h2>
+
+        <div>
+          <img src={Logo} alt="Logo" className='w-1/3 m-auto mb-4' />  
+        </div>
+
+          <h2 className='text-center text-3xl font-semibold mb-2'>Enter 4 Digits Code</h2>
           
           <p className='text-center text-sm text-gray-600 mb-5'>
             Enter the digits code that you received on<br />
@@ -88,7 +96,7 @@ function VerifyCode() {
           />
         </RoundedDiv>
       </div>
-    </AuthLayout>
+    </ResetLayout>
   );
 }
 

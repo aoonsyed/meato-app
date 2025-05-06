@@ -3,41 +3,58 @@ import InputField from '../../components/InputField';
 import RoundedDiv from '../../components/RoundedDiv';
 import CustomMainButton from '../../components/Custom_Main_Button';
 import { useNavigate } from 'react-router';
-import AuthLayout from '../../layouts/AuthLayout';
+import ResetLayout from '../../layouts/ResetLayout';
 import ResetHero from '../../assets/Auth/ResetHero.png';
+import { useLocation } from 'react-router';
+import api from '../../services/ApiCall';
+import Logo from '../../assets/Auth/Logo.png';
+import { toast } from 'react-toastify';
 
 function ResetPassword() {
+  const location = useLocation();
+  const code = location.state?.code || '';
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    if (errorMsg) setErrorMsg('');
+
   };
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
-    if (errorMsg) setErrorMsg('');
   };
 
   const handleReset = () => {
 
     if (!password || !confirmPassword) {
-      setErrorMsg('Please fill in all fields.');
+      toast.error('Please fill in all fields.');
       return;
     }
 
     if (password !== confirmPassword) {
-      setErrorMsg('Passwords do not match.');
+      toast.error('Passwords do not match.');
       return;
     }
 
+    api.post('accounts/changepassword/', {
+      "otp": code,
+      "password": password
+    })
+    .then(response => {
+      if (response.status === 200) {
+        toast.success('Password reset successfully!');
+        navigate('/login');
+      } else if (response.status === 400) {
+        toast.error('Invalid OTP. Please try again.');
+        navigate('/verify-code');
+      } 
+      else {
+        toast.error(response.msg || 'An error occurred. Please try again later.');
+      }
+    })
 
-
-
-    navigate('/login');
   };
 
   const handleKeyDown = (e) => {
@@ -47,46 +64,53 @@ function ResetPassword() {
   };
 
   return (
-    <AuthLayout>
+    <ResetLayout animation={ResetHero}>
       <div className='flex flex-col justify-center items-center h-full w-full'>
-        <div className='mb-8'>
-          <img src={ResetHero} alt="Reset Password" />
-        </div>
         <RoundedDiv
           height="auto"
           width="90%"
           className='max-w-md py-10 px-6 flex flex-col gap-4'
         >
-          <h2 className='text-center text-xl font-semibold mb-2'>Reset Password</h2>
+          <div>
+            <img src={Logo} alt="Logo" className='w-1/3 m-auto mb-4' />  
+          </div>
+          <h2 className='text-center text-3xl font-semibold mb-2'>Reset Password?</h2>
           
           <p className='text-center text-sm text-gray-600 mb-5'>
             Set a new password for your account so<br />
             you can login and access all the features.
           </p>
           
-          {errorMsg && (
-            <p className='text-center text-sm text-red-500 mb-2'>{errorMsg}</p>
-          )}
           
-          <InputField
-            placeholder="Password"
-            type="password"
-            width="100%"
-            className="mb-3"
-            value={password}
-            onChange={handlePasswordChange}
-            onKeyDown={handleKeyDown}
-          />
+          <div>
+            <InputField
+              placeholder="Password"
+              type="password"
+              width="100%"
+              className="mb-3 mt-1"
+              value={password}
+              onChange={handlePasswordChange}
+              onKeyDown={handleKeyDown}
+              id={"password"}
+              labelName={"Password"}
+              compulsory={true}
+            />
+          </div>
           
-          <InputField
-            placeholder="Confirm Password"
-            type="password"
-            width="100%"
-            className="mb-5"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            onKeyDown={handleKeyDown}
-          />
+          <div>
+            <InputField
+              placeholder="Confirm Password"
+              type="password"
+              width="100%"
+              className="mb-5 mt-1"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              onKeyDown={handleKeyDown}
+              id={"confirm_password"}
+              labelName={"Confirm Password"}
+              compulsory={true}
+            />
+          </div>
           
           <CustomMainButton
             text="Reset Password"
@@ -97,7 +121,7 @@ function ResetPassword() {
           />
         </RoundedDiv>
       </div>
-    </AuthLayout>
+    </ResetLayout>
   );
 }
 

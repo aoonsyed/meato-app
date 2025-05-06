@@ -40,9 +40,6 @@ function landingPage() {
             Pre-Cut And Pre-Cleaned<br className="md:hidden"/> For Easy Cooking
           </h1>
         </div>
-      </div>
-      
-      <div className="flex justify-center relative -translate-y-15">
         <CustomMainButton
           text="GET STARTED"
           variant="primary"
@@ -54,6 +51,8 @@ function landingPage() {
           ref={btnRef}
         />
       </div>
+      
+      
     </AuthLayout>
   );
 }
