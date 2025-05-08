@@ -1,0 +1,11 @@
+.category-slider .slick-slide {
+  padding: 0 10px;
+}
+
+.category-slider .slick-list {
+  margin: 0 -10px;
+}
+
+.category-slider .slick-dots .slick-active div {
+  background-color: #dc2626; /* red-600 */
+}
