@@ -1,12 +1,11 @@
 import React from 'react';
-import HeaderComponent from '../../components/HeaderComponent';
 import BG from "../../assets/landingPage/raw-meat-table.png"
 import Custom_Main_Button from '../../components/Custom_Main_Button';
 import OrderImg from "../../assets/landingPage/easy-order.png";
 import DeliveryImg from "../../assets/landingPage/delivery.png";
 import QualityImg from "../../assets/landingPage/quality.png";
 import CategoryCarousal from '../../components/CategoryCarousal';
-import PopularProducts from '../../components/PopularProducts';
+import PopularProducts from '../../components/ProductGrid';
 import knife from "../../assets/products/knife.png";
 import steak from "../../assets/products/steak.png";
 import bites from "../../assets/products/bites.png";
@@ -16,10 +15,169 @@ import Online from "../../assets/products/OnlineIcon.png";
 import Banner from "../../assets/products/BannerImg.jpg"
 import PlayStore from "../../assets/products/Playstore.png"
 import AppStore from "../../assets/products/Appstore.png"
-import FooterComponent from "../../components/FooterComponent"
+import muttonChopsImage from '../../assets/products/mutton-chops.png';
+import ProductGrid from '../../components/ProductGrid';
+
+
 
 
 function LandingPage() {  
+
+  const popularProducts = [
+    {
+      id: 1,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 2,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 3,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 4,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 5,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 6,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 7,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 8,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 1,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 2,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 3,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 4,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 5,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 6,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 7,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 8,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 8,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 8,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+    {
+      id: 8,
+      name: 'Mutton Chops',
+      weight: '1kg',
+      price: 90.00,
+      originalPrice: 110.00,
+      image: muttonChopsImage,
+    },
+  ];
+
   return (
    <>
 
@@ -87,7 +245,10 @@ function LandingPage() {
     {/* Browse by Category End */}
 
     {/* Popular Products Start */}
-    <PopularProducts />
+    <ProductGrid
+    title={"Popular Products"}
+    products={popularProducts}
+    />
     {/* Popular Products End */}
 
     {/* Banner 1 Start */}

@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import muttonChopsImage from '../assets/products/mutton-chops.png';
+
 import LeftBtn from "../assets/products/LeftBtn.png";
 import RightBtn from "../assets/products/RightBtn.png";
 
-const PopularProducts = () => {
+const ProductGrid = ({title, products}) => {
   const scrollContainerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [screenSize, setScreenSize] = useState('large');
@@ -32,165 +32,10 @@ const PopularProducts = () => {
   
   const isMobile = screenSize === 'mobile';
   
-  // Sample data - this would typically come from an API or props
-  const popularProducts = [
-    {
-      id: 1,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 2,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 3,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 4,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 5,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 6,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 7,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 8,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 1,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 2,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 3,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 4,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 5,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 6,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 7,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 8,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 8,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 8,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-    {
-      id: 8,
-      name: 'Mutton Chops',
-      weight: '1kg',
-      price: 90.00,
-      originalPrice: 110.00,
-      image: muttonChopsImage,
-    },
-  ];
 
   // Calculate total pages and current page products
-  const totalPages = Math.ceil(popularProducts.length / productsPerPage);
-  const currentProducts = popularProducts.slice(
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const currentProducts = products.slice(
     currentPage * productsPerPage,
     (currentPage + 1) * productsPerPage
   );
@@ -228,7 +73,7 @@ const PopularProducts = () => {
     <div className="py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Popular Products</h2>
+          <h2 className="text-3xl font-bold">{title}</h2>
           <div className="flex space-x-4">
             <button 
               onClick={isMobile ? scrollLeft : goToPreviousPage}
@@ -281,4 +126,4 @@ const PopularProducts = () => {
   );
 };
 
-export default PopularProducts;
+export default ProductGrid;
