@@ -5,7 +5,6 @@ import OrderImg from "../../assets/landingPage/easy-order.png";
 import DeliveryImg from "../../assets/landingPage/delivery.png";
 import QualityImg from "../../assets/landingPage/quality.png";
 import CategoryCarousal from '../../components/CategoryCarousal';
-import PopularProducts from '../../components/ProductGrid';
 import knife from "../../assets/products/knife.png";
 import steak from "../../assets/products/steak.png";
 import bites from "../../assets/products/bites.png";
@@ -13,8 +12,8 @@ import Delivery from "../../assets/products/DeliveryIcon.png";
 import Top from "../../assets/products/TopIcon.png";
 import Online from "../../assets/products/OnlineIcon.png";
 import Banner from "../../assets/products/BannerImg.jpg"
-import PlayStore from "../../assets/products/Playstore.png"
-import AppStore from "../../assets/products/Appstore.png"
+import PlayStore from "../../assets/products/PlayStore.png"
+import AppStore from "../../assets/products/AppStore.png"
 import muttonChopsImage from '../../assets/products/mutton-chops.png';
 import ProductGrid from '../../components/ProductGrid';
 
@@ -284,7 +283,7 @@ function LandingPage() {
             </div>
             
             {/* Right side - Text content */}
-            <div className="md:w-7/12 p-4 pl-20">
+            <div className="md:w-7/12 p-4 lg:pl-20">
               <h2 className="text-6xl font-bold text-gray-900 mb-4">Top-Quality Meat to Your Door</h2>
               <p className="text-gray-600 mb-6">
                 Our curated butcher shop delivers premium cuts to your door in no time. Enjoy fresh, hygienically packed meat without stepping out.

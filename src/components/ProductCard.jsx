@@ -1,9 +1,16 @@
 import React from 'react';
 import CustomMainButton from './Custom_Main_Button';
+import { useNavigate } from 'react-router';
 
-const ProductCard = ({ image, name, weight, price, originalPrice }) => {
+const ProductCard = ({ image, name, weight, price, originalPrice, id }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if (id){
+      navigate(`/product/${id}`);
+        }
+  };
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer" onClick={handleClick}>
       <div className="h-48 overflow-hidden">
         <img 
           src={image} 

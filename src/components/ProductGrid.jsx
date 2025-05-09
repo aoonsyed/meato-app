@@ -100,6 +100,7 @@ const ProductGrid = ({title, products}) => {
           {currentProducts.map((product, index) => (
             <div key={product.id + "-" + index} className="w-56 md:w-auto">
               <ProductCard
+                id={product.id}
                 image={product.image}
                 name={product.name}
                 weight={product.weight}

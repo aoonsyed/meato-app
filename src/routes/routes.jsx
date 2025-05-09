@@ -12,6 +12,8 @@ import UnprotectedRoutes from "../components/UnprotectedRoutes"
 import LandingLayout from "../layouts/LandingLayout";
 import AboutUs from "../pages/LandingPages/AboutUs";
 import Services from "../pages/LandingPages/Services";
+import ContactUs from "../pages/LandingPages/ContactUs";
+import ProductPage from "../pages/product/ProductPage";
 
 
 
@@ -32,7 +34,8 @@ const router = createBrowserRouter(
             <Route path="/" element={<LandingPage/>}/>,
             <Route path="/about" element={<AboutUs/>}/>
             <Route path="/services" element={<Services/>}/>
-
+            <Route path="/contact" element={<ContactUs/>}/>,
+            <Route path="/product/:id" element={<ProductPage/>}/>,
         </Route>
 
 

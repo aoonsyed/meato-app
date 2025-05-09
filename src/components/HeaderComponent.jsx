@@ -96,12 +96,12 @@ const HeaderComponent = () => {
           {mobileMenuOpen && (
             <div className="absolute top-full left-0 right-0 bg-[#636363] md:hidden z-50">
               <div className="flex flex-col px-4 py-2">
-                <Link to="/" className="font-roboto font-medium text-white py-2">Home</Link>
-                <Link to="/about" className="font-roboto font-medium text-white py-2">About Us</Link>
-                <Link to="/services" className="font-roboto font-medium text-white py-2">Services</Link>
-                <Link to="/sell" className="font-roboto font-medium text-white py-2">Sell With Us</Link>
-                <Link to="/news" className="font-roboto font-medium text-white py-2">News</Link>
-                <Link to="/contact" className="font-roboto font-medium text-white py-2">Contact Us</Link>
+                <Link to="/" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Home</Link>
+                <Link to="/about" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>About Us</Link>
+                <Link to="/services" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Services</Link>
+                <Link to="/sell" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Sell With Us</Link>
+                <Link to="/news" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>News</Link>
+                <Link to="/contact" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Contact Us</Link>
               </div>
             </div>
           )}
