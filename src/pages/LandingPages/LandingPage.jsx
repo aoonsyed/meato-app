@@ -240,7 +240,9 @@ function LandingPage() {
     {/* Landing Content End */}
 
     {/* Browse by Category Start */}
-    <CategoryCarousal/>
+    <div className='overflow-hidden'>
+      <CategoryCarousal/>
+      </div>
     {/* Browse by Category End */}
 
     {/* Popular Products Start */}
