@@ -5,10 +5,13 @@ import img2 from "../../assets/products/WholeChickenBlack.jpg"
 import CustomMainButton from '../../components/Custom_Main_Button'
 import MuttonChops from "../../assets/products/mutton-chops.png"
 import ProductGrid from '../../components/ProductGrid'
-import Cart from '../../components/Cart'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../store/cartSlice'
+import { openCart } from '../../store/uiSlice'
 
 function ProductPage() {
     const { id } = useParams()
+    const dispatch = useDispatch()
 
     const product = {
         id: 1,
@@ -48,7 +51,11 @@ function ProductPage() {
             setQuantity(value)
         }
     }
-
+    const updateCart = ()=> {
+        dispatch(addToCart(
+            {...product, quantity: quantity, image: product.images[selectedImageIndex]}
+        ))
+    }
     return (
         <>
             <div className="max-w-7xl mx-auto px-4 py-8 mt-32">
@@ -148,13 +155,18 @@ function ProductPage() {
                             <CustomMainButton
                                 text="Buy Now"
                                 width="100%"
-                                className="flex-1"
+                                className="flex-1 hover:shadow-2xl transition-shadow duration-200"
+                                onClick={()=> {
+                                    updateCart()
+                                    dispatch(openCart())
+                                }}
                             />
                             <CustomMainButton
                                 text="Add to Cart"
                                 width="100%"
                                 variant="outline"
                                 className="flex-1 border-[#FFB752] !rounded-full"
+                                onClick={updateCart}
                             />
                         </div>
                     </div>
@@ -167,10 +179,6 @@ function ProductPage() {
                     />
                 </div>
             </div>
-
-            {/* <div>
-                <Cart/>
-            </div> */}
         </>
         
     )

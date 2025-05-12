@@ -7,12 +7,33 @@ import linkedin from "../assets/landingPage/linkedin.png"
 import youtube from "../assets/landingPage/youtube.png"
 import logo from "../assets/Auth/Logo.png"
 import find from "../assets/landingPage/findIcon.png"
-import cart from "../assets/landingPage/cartIcon.png"
+import cartIcon from "../assets/landingPage/cartIcon.png"
 import account from "../assets/landingPage/accountIcon.png"
 import React, { useState } from 'react'
 import { Link, NavLink } from "react-router"
+import CartModal from './CartModal'
+import { useSelector, useDispatch } from 'react-redux'
+import { openCart, closeCart } from "../store/uiSlice"
+
+
+// Temporary 
+import img1 from '../assets/products/WholeChickenWhite.jpg' 
+import img2 from '../assets/products/WholeChickenBlack.jpg'
+import img3 from '../assets/products/mutton-chops.png'
 
 const HeaderComponent = () => {
+
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  
+      const openingCart = () => {
+          dispatch(openCart())
+      };
+  
+      const closingCart = () => {
+          dispatch(closeCart());
+      };
+  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const socials = [
@@ -78,8 +99,16 @@ const HeaderComponent = () => {
             
             {/* Cart Icon */}
             <button className="text-white">
-              <img src={cart} alt="Search Icon" className="h-7 w-7" />
+              <img src={cartIcon} alt="Search Icon" className="h-7 w-7 cursor-pointer hover:scale-110 transition-transform duration-200" onClick={openingCart}/>              {cartItems.length > 0 && (
+                    <span className="absolute top-2 right-8 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                        {cartItems.length}
+                    </span>
+                )}  
             </button>
+            <CartModal  
+                onClose={closingCart} 
+                cart={cartItems} 
+            />
             
             {/* Mobile Menu Button */}
             <button 

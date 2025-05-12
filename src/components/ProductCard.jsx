@@ -1,14 +1,30 @@
 import React from 'react';
 import CustomMainButton from './Custom_Main_Button';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/cartSlice';
 
 const ProductCard = ({ image, name, weight, price, originalPrice, id }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
   const handleClick = () => {
     if (id){
       navigate(`/product/${id}`);
-        }
+    }
   };
+
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    dispatch(addToCart({
+      id,
+      name,
+      price,
+      image,
+      quantity: 1
+    }));
+  };
+  
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer" onClick={handleClick}>
       <div className="h-48 overflow-hidden">
@@ -31,16 +47,14 @@ const ProductCard = ({ image, name, weight, price, originalPrice, id }) => {
               </span>
             )}
           </div>
-          {/* <button className="px-3 py-1 border border-red-500 text-red-500 rounded text-sm hover:bg-red-500 hover:text-white transition-colors">
-            ADD
-          </button> */}
           <CustomMainButton
-          text='ADD'
-          variant='outline'
-          height='auto'
-          width='auto'
-          fontSize='12px'
-          className='px-5 py-1'
+            text='ADD'
+            variant='outline'
+            height='auto'
+            width='auto'
+            fontSize='12px'
+            className='px-5 py-1'
+            onClick={handleAddToCart}
           />
         </div>
       </div>

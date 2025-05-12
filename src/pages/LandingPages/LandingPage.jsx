@@ -16,6 +16,7 @@ import PlayStore from "../../assets/products/PlayStore.png"
 import AppStore from "../../assets/products/AppStore.png"
 import muttonChopsImage from '../../assets/products/mutton-chops.png';
 import ProductGrid from '../../components/ProductGrid';
+import { useNavigate } from 'react-router';
 
 
 
@@ -177,6 +178,8 @@ function LandingPage() {
     },
   ];
 
+  const navigate = useNavigate();
+
   return (
    <>
 
@@ -195,7 +198,7 @@ function LandingPage() {
       </div>
 
       <div className='z-10 mt-4'>
-        <Custom_Main_Button text='Get Started'/>
+        <Custom_Main_Button text='Get Started' onClick={()=>(navigate("/services"))}/>
       </div>
     </div>      
     {/* Landing Hero End */}
