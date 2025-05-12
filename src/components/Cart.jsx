@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import remove from "../assets/cart/Remove.png"
+import Cancel from "../assets/cart/Cancel.png"
+import Custom_Main_Button from "./Custom_Main_Button"
 
 // Temporary 
 import img1 from '../assets/products/WholeChickenWhite.jpg' 
@@ -69,19 +71,19 @@ function Cart() {
 
     return (
         <>
-        <div className='flex flex-col items-cente justify-center bg-gray-500 w-full max-w-3xl py-10 px-10'>
+        <div className='flex flex-col items-cente justify-center w-full max-w-3xl py-10 px-10'>
 
-            <div className='flex pb-3 mb-3 border-b-[0.5px] border-[#D8D8D8] w-full'>
-                <div className='w-1/2'>
-                    <h1 className='font-bold text-2xl'>Your Cart</h1>
+            <div className='flex flex-col pb-3 mb-3 border-b-[0.5px] border-[#D8D8D8] w-full'>
+                <div className=' flex justify-end'>
+                    <img src={Cancel} alt="Cross Button" className='w-8'/>
                 </div>
-                <div className='w-1/2 justify-self-end'>
-                    X
+                <div className=''>
+                    <h1 className='font-bold text-2xl'>Your Cart</h1>
                 </div>
             </div>
 
             {/* Products Start  */}
-            <div className="w-full max-w-3xl mx-auto bg-amber-500">
+            <div className="w-full max-w-3xl mx-auto">
                 {cart.map((item) => (
                     <div key={item.id} className="flex justify-between items-center py-4 border-b border-gray-100">
                         <div className="flex items-center">
@@ -128,6 +130,34 @@ function Cart() {
                 ))}
             </div>
             {/* Products End */}
+
+            {/* Total Start*/}
+            <div className="w-full max-w-3xl mx-auto mt-6">
+                <div className="flex justify-between items-center py-3">
+                    <p className="font-medium text-lg">Subtotal ({cart.length} {cart.length === 1 ? 'Item' : 'Items'})</p>
+                    <div className='border-b border-dashed border-[#D8D8D8s] flex-grow mx-5'></div>                 <p className="font-bold text-lg">${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}</p>
+                </div>
+                
+                <div className="flex justify-between items-center py-3">
+                    <p className="font-medium text-lg">Shipping Fee</p>
+                    <div className='border-b border-dashed border-[#D8D8D8s] flex-grow mx-5'></div> 
+                    <p className="font-bold text-lg">$0</p>
+                </div>
+                
+                <div className="flex justify-between items-center py-3">
+                    <p className="font-medium text-lg">Total</p>
+                    <div className='border-b border-dashed border-[#D8D8D8s] flex-grow mx-5'></div> 
+                    <p className="font-bold text-lg">${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}</p>
+                </div>
+                
+                <div className="mt-6 mb-2 flex justify-center">
+                    <Custom_Main_Button
+                        text="Check Out"
+                        className="border-none"
+                    />
+                </div>
+            </div>
+            {/* Total End */}
         </div>
         </>
     )
