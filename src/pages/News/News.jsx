@@ -3,34 +3,40 @@ import { useParams } from 'react-router'
 import NewsGrid from "../../components/NewsGrid"
 
 // Temporary Static Imports
+import {
+    dummy1,
+    dummy2,
+    dummy3,
+    dummy4,
+} from "../../assets/news/index"
 import News1 from "../../assets/news/staticNews1.png"
 import News2 from "../../assets/news/staticNews2.jpg"
 
 const news = [
-    {
-        id: 1,
-        image: '/src/assets/news/dummy1.jpg',
-        title: 'How to prepare a delicious gluten free sushi',
-        date: '2023-01-03'
-    },
-    {
-        id: 2,
-        image: '/src/assets/news/dummy2.jpg',
-        title: 'Exclusive baking lessons from the pastry king',
-        date: '2023-01-05'
-    },
-    {
-        id: 3,
-        image: '/src/assets/news/dummy3.jpg',
-        title: 'How to prepare the perfect fries in an air fryer',
-        date: '2023-01-03'
-    },
-    {
-        id: 4,
-        image: '/src/assets/news/dummy4.jpg',
-        title: 'How to prepare delicious chicken tenders',
-        date: '2023-01-03'
-    },
+     {
+                id: 1,
+                image: dummy1,
+                title: 'How to prepare a delicious gluten free sushi',
+                date: '2023-01-03'
+            },
+            {
+                id: 2,
+                image: dummy2,
+                title: 'Exclusive baking lessons from the pastry king',
+                date: '2023-01-05'
+            },
+            {
+                id: 3,
+                image: dummy3,
+                title: 'How to prepare the perfect fries in an air fryer',
+                date: '2023-01-03'
+            },
+            {
+                id: 4,
+                image: dummy4,
+                title: 'How to prepare delicious chicken tenders',
+                date: '2023-01-03'
+            },
 ]
 
 function News() {
