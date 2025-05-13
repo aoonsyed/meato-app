@@ -52,7 +52,7 @@ const HeaderComponent = () => {
 
           <div className="flex items-center my-1 mx-5 justify-center md:justify-start">
             <img src={email} alt="Email Icon" className="h-1/2 mr-2" />
-            <span className="font-roboto font-semibold text-sm text-white">meatappexample@gmail.com</span>
+            <span className="font-roboto font-semibold text-sm text-white">meatoapp@gmail.com</span>
           </div>
 
           <div className="flex items-center flex-grow my-1 mx-5 justify-center md:justify-start">

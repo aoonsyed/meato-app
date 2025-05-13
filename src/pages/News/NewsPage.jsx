@@ -1,78 +1,88 @@
 import React from 'react'
 import NewsGrid from '../../components/NewsGrid'
+import {
+    dummy1,
+    dummy2,
+    dummy3,
+    dummy4,
+    dummy5,
+    dummy6,
+    dummy7,
+    dummy8,
+} from "../../assets/news/index"
 
 function NewsPage() {
 
 const news = [
         {
             id: 1,
-            image: '/src/assets/news/dummy1.jpg',
+            image: dummy1,
             title: 'How to prepare a delicious gluten free sushi',
             date: '2023-01-03'
         },
         {
             id: 2,
-            image: '/src/assets/news/dummy2.jpg',
+            image: dummy2,
             title: 'Exclusive baking lessons from the pastry king',
             date: '2023-01-05'
         },
         {
             id: 3,
-            image: '/src/assets/news/dummy3.jpg',
+            image: dummy3,
             title: 'How to prepare the perfect fries in an air fryer',
             date: '2023-01-03'
         },
         {
             id: 4,
-            image: '/src/assets/news/dummy4.jpg',
+            image: dummy4,
             title: 'How to prepare delicious chicken tenders',
             date: '2023-01-03'
         },
         {
             id: 5,
-            image: '/src/assets/news/dummy5.jpg',
+            image: dummy5,
             title: '5 great cooking gadgets you can buy to save time',
             date: '2023-01-03'
         },
         {
             id: 6,
-            image: '/src/assets/news/dummy6.jpg',
+            image: dummy6,
             title: 'The secret tips & tricks to prepare a perfect burger',
             date: '2023-01-05'
         },
         {
             id: 7,
-            image: '/src/assets/news/dummy7.jpg',
+            image: dummy7,
             title: '7 delicious cheesecake recipes you can prepare',
             date: '2023-01-03'
         },
         {
             id: 8,
-            image: '/src/assets/news/dummy8.jpg',
+            image: dummy8,
             title: '5 great pizza restaurants you should visit this city',
             date: '2023-01-03'
         },
         {
             id: 9,
-            image: '/src/assets/news/dummy5.jpg',
+            image: dummy5,
             title: '5 great cooking gadgets you can buy to save time',
             date: '2023-01-03'
         },
         {
             id: 10,
-            image: '/src/assets/news/dummy1.jpg',
+            image: dummy1,
             title: 'How to prepare a delicious gluten free sushi',
             date: '2023-01-05'
         },
         {
             id: 11,
-            image: '/src/assets/news/dummy3.jpg',
+            image: dummy3,
             title: 'Top 20 simple and quick desserts for kids',
             date: '2023-01-03'
         },
         {
             id: 12,
-            image: '/src/assets/news/dummy8.jpg',
+            image: dummy8,
             title: 'Top 20 simple and quick desserts for guests',
             date: '2023-01-03'
         },
