@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Carousal1 from "../../assets/landingPage/Services/Carousal1.jpg"
 import ImageCarousal from '../../components/ImageCarousal'
 import CategoryCarousal from "../../components/CategoryCarousal"
@@ -315,20 +315,29 @@ function Services() {
           },
     ]
 
+    const prodRef = useRef(null)
+
+      const onClick = () => {
+        prodRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+        })
+      }
 
     return(
         <>
         <div className='container mx-auto overflow-hidden'>
             <div className='mx-10'>
                 <div className='mt-32'>
-                    <ImageCarousal carousal={carousal}/>
+                    <ImageCarousal carousal={carousal} btnOnClick={onClick}/>
                 </div>
             </div>
             <div>
                 <CategoryCarousal/>
             </div>
             
-                <div className="my-8">
+                <div className="my-8" ref={prodRef}>
                     <ProductGrid 
                         products={wholeChicken} 
                         title="Whole Chicken" 

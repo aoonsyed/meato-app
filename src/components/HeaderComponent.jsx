@@ -10,7 +10,7 @@ import find from "../assets/landingPage/findIcon.png"
 import cartIcon from "../assets/landingPage/cartIcon.png"
 import account from "../assets/landingPage/accountIcon.png"
 import React, { useState } from 'react'
-import { Link, NavLink } from "react-router"
+import { Link, NavLink, useNavigate } from "react-router"
 import CartModal from './CartModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { openCart, closeCart } from "../store/uiSlice"
@@ -23,6 +23,7 @@ import img3 from '../assets/products/mutton-chops.png'
 
 const HeaderComponent = () => {
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   
@@ -94,7 +95,7 @@ const HeaderComponent = () => {
             
             {/* Account Icon */}
             <button className="text-white">
-              <img src={account} alt="Search Icon" className="h-7 w-7" />
+              <img src={account} alt="Search Icon" className="h-7 w-7 cursor-pointer hover:scale-110 transition-transform duration-200" onClick={()=> navigate("/login")}/>
             </button>
             
             {/* Cart Icon */}

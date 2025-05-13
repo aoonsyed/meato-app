@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import remove from "../assets/cart/Remove.png";
 import Custom_Main_Button from "./Custom_Main_Button";
 import Modal from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, clearCart } from '../store/cartSlice';
+import DeliveryModal from './DeliveryModal';
 
 function CartModal({ onClose, cart }) {
   const dispatch = useDispatch();
@@ -25,9 +26,25 @@ function CartModal({ onClose, cart }) {
     }));
   };
 
+  const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+
+  const handleCheckout = () => {
+    onClose();
+    setIsDeliveryModalOpen(true);
+  }
+  const onDeliveryModalClose = () => {
+    setIsDeliveryModalOpen(false);
+  }
+
+  const handleSaveAddress = (address) => {
+    console.log("Address saved:", address);
+  }
+
+
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (
+    <>
     <Modal
       isOpen={isOpen}
       onClose={onClose}
@@ -104,6 +121,7 @@ function CartModal({ onClose, cart }) {
             <Custom_Main_Button
               text="Check Out"
               className="w-full border-none"
+              onClick={handleCheckout}
             />
           </div>
         </div>
@@ -112,6 +130,10 @@ function CartModal({ onClose, cart }) {
           <p className="text-gray-500">Your cart is empty</p>
         </div>
       )}    </Modal>
+      
+      <DeliveryModal isOpen={isDeliveryModalOpen} onClose={onDeliveryModalClose} onSaveAddress={handleSaveAddress} setIsDeliveryModalOpen={setIsDeliveryModalOpen}/>
+    </>
+      
   );
 }
 

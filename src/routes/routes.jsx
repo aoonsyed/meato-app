@@ -14,6 +14,9 @@ import AboutUs from "../pages/LandingPages/AboutUs";
 import Services from "../pages/LandingPages/Services";
 import ContactUs from "../pages/LandingPages/ContactUs";
 import ProductPage from "../pages/product/ProductPage";
+import NewsPage from "../pages/News/NewsPage";
+import News from "../pages/News/News";
+import SellWithUsPge from "../pages/LandingPages/SellWithUsPge";
 
 
 
@@ -36,6 +39,9 @@ const router = createBrowserRouter(
             <Route path="/services" element={<Services/>}/>
             <Route path="/contact" element={<ContactUs/>}/>,
             <Route path="/product/:id" element={<ProductPage/>}/>,
+            <Route path="/news/" element={<NewsPage/>}/>,
+            <Route path="/news/:id" element={<News/>}/>,
+            <Route path="/sell" element={<SellWithUsPge/>}/>,
         </Route>
 
 

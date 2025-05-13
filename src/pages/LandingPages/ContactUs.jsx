@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import RoundedDiv from '../../components/RoundedDiv'
 import Custom_Main_Button from "../../components/Custom_Main_Button"
+import meatBG from "../../assets/landingPage/meatBG.jpg"
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -25,14 +26,19 @@ function ContactUs() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-10 px-4 min-h-screen pt-36 md:pt-28">
-      <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-      <p className="text-[#636363] font-medium text-center mb-2">
-        Have questions or need support? We are here to help.
-      </p>
-      <p className="text-[#636363] font-medium text-center mb-10">
-        Reach out to us anytime.
-      </p>
+    <div className="flex flex-col items-center justify-center py-10 px-4 min-h-screen pt-36 md:pt-28 relative">
+
+    <div className='absolute top-12 left-0 w-full h-full bg-center -z-10'
+                  style={{ 
+                    backgroundImage: `url(${meatBG})`,
+                    backgroundSize: 'cover',
+                    backgroundAttachment: 'fixed',
+                  }} 
+                >
+    <div className='absolute top-0 left-0 w-full h-full bg-[#000000] opacity-60'/>
+    </div>
+
+      <h1 className="text-4xl font-bold mb-4 text-white">Contact Us</h1>
       
       <RoundedDiv 
         className="p-8 w-full max-w-2xl"

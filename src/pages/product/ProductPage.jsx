@@ -16,7 +16,7 @@ function ProductPage() {
     const product = {
         id: 1,
         name: 'Halal Whole Chicken',
-        catergories: ["whole bird", "bone-in & skinless"],
+        categories: ["whole bird", "bone-in & skinless"],
         description: 'Skinless and tender, the Whole Chicken from Licious is thoroughly cleaned and processed with care. This full bird includes all essential cuts like breast, drumsticks, thighs, wings, and backbone. Ideal for roasting, curries, grilling, or stews. Sourced from young and healthy chickens, the meat is juicy, flavourful, and high in protein. Delivered fresh, not frozen, for the perfect home-cooked meal.',
         details: ['No of Pieces 6', 'serves 2-3', "600g", 'Skinless & Boneless', 'Freshly Cut'],
         price: 23.00,
@@ -101,7 +101,7 @@ function ProductPage() {
                         <h1 className="text-3xl font-bold">{product.name}</h1>
             
                         <div className="flex gap-2 text-sm text-gray-600 mt-1">
-                            {product.catergories.map((category, index) => (
+                            {product.categories.map((category, index) => (
                                 <span key={index}>{`${category} | `}</span>
                             ))}
                         </div>
