@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import eye from "../assets/Auth/eye.svg";
+import eyeOff from "../assets/Auth/eyeOff.png";
 
 const InputField = ({
     variant = "grey",
@@ -72,7 +73,7 @@ const InputField = ({
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
                         aria-label={passwordVisible ? "Hide password" : "Show password"}
                     >
-                        <img src={eye} alt="Toggle password visibility" />
+                        <img src={passwordVisible? eye: eyeOff} alt="Toggle password visibility" className="h-5 w-5"/>
                     </button>
                 )}
             </div>

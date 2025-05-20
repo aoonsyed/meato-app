@@ -9,6 +9,7 @@ import youtube from "../assets/landingPage/youtube.png"
 import logo from "../assets/Auth/Logo.png"
 import CustomMainButton from "./Custom_Main_Button"
 import GalleryImg from "../assets/products/mutton-chops.png"
+import { Link, useNavigate } from 'react-router';
 
 const socials = [
     { src: facebook, link: "https://www.facebook.com/" },
@@ -19,6 +20,7 @@ const socials = [
 ]
 
 const FooterComponent = () => {
+  const navigate = useNavigate();
   return (
     <footer className="bg-[#222222] text-white p-12 mt-12">
       <div className="container mx-auto">
@@ -32,7 +34,8 @@ const FooterComponent = () => {
             <h3 className="text-xl font-bold mb-6">Hygienically to Your Doorstep.</h3>
             <div className="w-full max-w-[250px]">
               <CustomMainButton 
-                text="Contact Us" 
+                text="Contact Us"
+                onClick={()=> navigate("/contact")}
               />
             </div>
           </div>
@@ -41,11 +44,16 @@ const FooterComponent = () => {
           <div className="w-full md:w-1/6 ">
             <h3 className="text-xl font-bold mb-6">Explore</h3>
             <ul className="space-y-4">
-              <li><a href="#" className="hover:text-gray-300">About Us</a></li>
-              <li><a href="#" className="hover:text-gray-300">Place Order</a></li>
-              <li><a href="#" className="hover:text-gray-300">Our Services</a></li>
-              <li><a href="#" className="hover:text-gray-300">Latest News</a></li>
-              <li><a href="#" className="hover:text-gray-300">Contact</a></li>
+              <li><Link to={"/about"} className="hover:text-gray-300">About Us</Link></li>
+              <li><Link to={"/"} className="hover:text-gray-300" onClick={() => {
+                navigate("/");
+                setTimeout(() => {
+                  document.getElementById("popular").scrollIntoView({ behavior: "smooth" });
+                }, 100);
+              }}>Place Order</Link></li>
+              <li><Link to={"/services"} className="hover:text-gray-300">Our Services</Link></li>
+              <li><Link to={"/news"} className="hover:text-gray-300">Latest News</Link></li>
+              <li><Link to={"/contact"} className="hover:text-gray-300">Contact</Link></li>
             </ul>
           </div>
 

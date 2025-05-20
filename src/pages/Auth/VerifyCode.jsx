@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import ResetLayout from '../../layouts/ResetLayout';
 import VerifyCodeHero from "../../assets/Auth/VerifyHero.png";
 import Logo from "../../assets/Auth/Logo.png";
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 function VerifyCode() {
   const [code, setCode] = useState(['', '', '', '']);

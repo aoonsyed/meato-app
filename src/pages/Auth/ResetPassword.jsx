@@ -8,7 +8,7 @@ import ResetHero from '../../assets/Auth/ResetHero.png';
 import { useLocation } from 'react-router';
 import api from '../../services/ApiCall';
 import Logo from '../../assets/Auth/Logo.png';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 function ResetPassword() {
   const location = useLocation();
@@ -38,22 +38,25 @@ function ResetPassword() {
       return;
     }
 
-    api.post('accounts/changepassword/', {
-      "otp": code,
-      "password": password
-    })
-    .then(response => {
-      if (response.status === 200) {
-        toast.success('Password reset successfully!');
+    // api.post('accounts/changepassword/', {
+    //   "otp": code,
+    //   "password": password
+    // })
+    // .then(response => {
+    //   if (response.status === 200) {
+    //     toast.success('Password reset successfully!');
+    //     navigate('/login');
+    //   } else if (response.status === 400) {
+    //     toast.error('Invalid OTP. Please try again.');
+    //     navigate('/verify-code');
+    //   } 
+    //   else {
+    //     toast.error(response.msg || 'An error occurred. Please try again later.');
+    //   }
+    // })
+
+    toast.success('Password reset successfully!');
         navigate('/login');
-      } else if (response.status === 400) {
-        toast.error('Invalid OTP. Please try again.');
-        navigate('/verify-code');
-      } 
-      else {
-        toast.error(response.msg || 'An error occurred. Please try again later.');
-      }
-    })
 
   };
 

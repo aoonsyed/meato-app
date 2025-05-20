@@ -8,6 +8,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import '../../styles/phoneInput.css'
 import meatBG from "../../assets/landingPage/meatBG.jpg"
+import removeIcon from "../../assets/cart/Remove.png"
 
 function SellWithUsPge() {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ function SellWithUsPge() {
     }
   });
   
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,37 +55,43 @@ function SellWithUsPge() {
   
   const handleFileChange = (e) => {
     if (e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
+      setSelectedFiles(prevFiles => [...prevFiles, ...Array.from(e.target.files)]);
     }
+  };
+
+  const removeFile = (indexToRemove) => {
+    setSelectedFiles(prevFiles => prevFiles.filter((_, index) => index !== indexToRemove));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData, selectedFile);
-    // Handle form submission here
+    console.log('Form submitted:', formData, selectedFiles);
+    
   };
 
   return (
     <>
      <div className="flex flex-col items-center justify-center py-10 px-4 min-h-screen pt-36 md:pt-28 relative">
       
-      <div className='absolute top-12 left-0 w-full h-full bg-center -z-10'
+      <div className='fixed inset-0 w-full h-full bg-center -z-10'
               style={{ 
                 backgroundImage: `url(${meatBG})`,
                 backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 backgroundAttachment: 'fixed',
               }} 
             >
               <div className='absolute top-0 left-0 w-full h-full bg-[#000000] opacity-60'/>
             </div>
       
-      <h1 className="text-4xl font-bold mb-4 text-white">Sell With Us</h1>
 
       <RoundedDiv 
         className="p-8 w-full max-w-2xl"
         width="100%"
         height="auto"
       >
+      <h1 className="text-4xl font-bold text-center mb-5">Sell With Us</h1>
+
         <div className="flex flex-wrap justify-center gap-4 mb-8">
           <FeatureBadge 
             text="Instant Payouts" 
@@ -200,7 +207,7 @@ function SellWithUsPge() {
               value={formData.city}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-md h-[40px] px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary my-0.5"
+              className="w-full border border-gray-300 rounded-md h-[40px] px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary my-0.5 cursor-pointer"
             >
               <option value="">Select your city</option>
               <option value="Karachi">Karachi</option>
@@ -249,28 +256,56 @@ function SellWithUsPge() {
               Upload Photos
             </label>
             <div className="mt-1">
-              <label className="flex justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                <span className="flex items-center space-x-2">
-                  <span className="font-medium text-gray-600">
-                    {selectedFile ? selectedFile.name : "Choose file"}
+              <label className="flex w-full  px-4 transition bg-white border-2 border-gray-300 rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none flex-wrap h-auto">
+                { selectedFiles.length === 0 &&
+                <div className='bg-[#D8D8D8] flex items-center justify-center rounded-xl m-1 px-3 '>
+                  <span>
+                    Choose files
                   </span>
-                </span>
+                </div>}
+
+                {
+                  selectedFiles.length > 0 && (
+                      selectedFiles.map((file, index) => (
+                        <div key={index} className='bg-[#D8D8D8] flex items-center justify-center rounded-xl m-1 p-2 relative font-semibold'>
+                          {file.name}
+                          <div 
+                            className="absolute -top-1 -right-1 w-4 h-4 cursor-pointer"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              removeFile(index);
+                            }}
+                          >
+                            <img 
+                              src={removeIcon} 
+                              alt="Remove" 
+                              className="h-4 w-4"
+                            />
+                          </div>
+                        </div>
+                      ))
+                  )
+                }
+
                 <input 
                   id="photos" 
                   name="photos" 
                   type="file" 
                   className="hidden"
+                  multiple
+                  accept="image/*"
                   onChange={handleFileChange}
                 />
               </label>
             </div>
+            
           </div>
           
           {/* Submit Button */}
           <div className="pt-4 flex justify-center">
             <Custom_Main_Button
               text="Submit Application"
-              className="w-full border-none"
+              className="w-full"
               type='submit'
             />
           </div>

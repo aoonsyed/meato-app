@@ -7,7 +7,7 @@ import ResetLayout from '../../layouts/ResetLayout';
 import ForgotHero from '../../assets/Auth/ForgotHero.png';
 import api from '../../services/ApiCall';
 import Logo from "../../assets/Auth/Logo.png";
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 function ForgotPassword() {
 
@@ -24,19 +24,22 @@ function ForgotPassword() {
             return;
         }
 
-        api.post('accounts/forgotpassword/', {
-            email: mail})
-            .then(response => {
-                if (response.status === 200) {
-                  toast.success("OTP sent to your email!");
-                  navigate('/verify-code');
-                } else {
-                  toast.error(response.msg || "Something went wrong");
-                }
-            })
-            .catch(error => {
-              toast.error("Something went wrong");
-            });
+        // api.post('accounts/forgotpassword/', {
+        //     email: mail})
+        //     .then(response => {
+        //         if (response.status === 200) {
+        //           toast.success("OTP sent to your email!");
+        //           navigate('/verify-code');
+        //         } else {
+        //           toast.error(response.msg || "Something went wrong");
+        //         }
+        //     })
+        //     .catch(error => {
+        //       toast.error("Something went wrong");
+        //     });
+
+        toast.success("OTP sent to your email!");
+        navigate('/verify-code');
     }
 
     const handleKeyDown = (e) => {

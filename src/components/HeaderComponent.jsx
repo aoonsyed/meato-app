@@ -9,7 +9,7 @@ import logo from "../assets/Auth/Logo.png"
 import find from "../assets/landingPage/findIcon.png"
 import cartIcon from "../assets/landingPage/cartIcon.png"
 import account from "../assets/landingPage/accountIcon.png"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from "react-router"
 import CartModal from './CartModal'
 import { useSelector, useDispatch } from 'react-redux'
@@ -27,13 +27,33 @@ const HeaderComponent = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   
-      const openingCart = () => {
-          dispatch(openCart())
-      };
+  // Add state for scroll handling
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
   
-      const closingCart = () => {
-          dispatch(closeCart());
-      };
+  // Handle scroll events  
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      
+      // Set visible if scrolling up or at the top of the page
+      const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
+      
+      setPrevScrollPos(currentScrollPos);
+      setVisible(isVisible);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
+  
+  const openingCart = () => {
+      dispatch(openCart())
+  };
+  
+  const closingCart = () => {
+      dispatch(closeCart());
+  };
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
@@ -47,8 +67,12 @@ const HeaderComponent = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <div className="flex md:h-12 bg-[#AE1F25] flex-col md:flex-row">
+      <div 
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+          visible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        <div className="flex md:h-8 bg-[#AE1F25] flex-col md:flex-row">
 
           <div className="flex items-center my-1 mx-5 justify-center md:justify-start">
             <img src={email} alt="Email Icon" className="h-1/2 mr-2" />
@@ -69,20 +93,20 @@ const HeaderComponent = () => {
 
         </div>
 
-        <div className="flex h-16 bg-[rgba(99,99,99,0.6)] items-center justify-between px-4 md:px-8 relative">
+        <div className="flex h-12 bg-[#636363] items-center justify-between px-4 md:px-8 relative">
           {/* Logo */}
           <div className="flex items-center">
-            <img src={logo} alt="Logo" className="h-8" />
+            <img src={logo} alt="Logo" className="h-11" />
           </div>
           
           {/* Navigation Links - Hidden on mobile, shown on larger screens */}
           <div className="hidden md:flex items-center space-x-6 mr-auto ml-5">
-            <NavLink to="/" className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-14 px-2": "text-white"} `}>Home</NavLink>
-            <NavLink to="/about" className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-14 px-2": "text-white"} `}>About Us</NavLink>
-            <NavLink to="/services"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-14 px-2": "text-white"} `}>Services</NavLink>
-            <NavLink to="/sell"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-14 px-2": "text-white"} `}>Sell With Us</NavLink>
-            <NavLink to="/news"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-14 px-2": "text-white"} `}>News</NavLink>
-            <NavLink to="/contact"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-14 px-2": "text-white"} `}>Contact Us</NavLink>
+            <NavLink to="/" className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Home</NavLink>
+            <NavLink to="/about" className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>About Us</NavLink>
+            <NavLink to="/services"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Services</NavLink>
+            <NavLink to="/sell"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Sell With Us</NavLink>
+            <NavLink to="/news"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>News</NavLink>
+            <NavLink to="/contact"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Contact Us</NavLink>
           </div>
           
           {/* Icons */}
@@ -137,6 +161,8 @@ const HeaderComponent = () => {
           )}
         </div>
       </div>
+      {/* Add padding to prevent content from jumping when header hides */}
+      <div className="h-20"></div>
     </>
   );
 }

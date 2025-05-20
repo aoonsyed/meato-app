@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import LeftBtn from "../assets/products/LeftBtn.png";
 import RightBtn from "../assets/products/RightBtn.png";
 
-const ProductGrid = ({title, products}) => {
+const ProductGrid = ({title, products, id}) => {
   const scrollContainerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [screenSize, setScreenSize] = useState('large');
@@ -70,7 +70,7 @@ const ProductGrid = ({title, products}) => {
   };
 
   return (
-    <div className="py-12 px-4">
+    <div className="py-12 px-4" id={id}>
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">{title}</h2>

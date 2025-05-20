@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Cancel from "../assets/cart/Cancel.png"
 
 function Modal({ isOpen, onClose, children, title, maxWidth = 'md' , className = ''}) {
+  const modalRef = useRef(null);
+
   // Prevent scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -15,6 +17,20 @@ function Modal({ isOpen, onClose, children, title, maxWidth = 'md' , className =
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+
+  // Add escape key listener
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (isOpen && e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -40,11 +56,12 @@ function Modal({ isOpen, onClose, children, title, maxWidth = 'md' , className =
 
   return (
     <div 
-      className= {`fixed inset-0 bg-[rgba(0,0,0,0.5)] w-screen z-50 flex items-center justify-center p-4 ${className}`}
+      className={`fixed inset-0 bg-[rgba(0,0,0,0.5)] w-screen h-screen z-[9999] flex items-center justify-center p-4 ${className}`}
       onClick={handleBackdropClick}
-    >
-      <div 
-        className={`bg-white rounded-md shadow-lg w-full ${getMaxWidthClass()} max-h-[90vh] overflow-y-auto`}
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+      ref={modalRef}
+    >      <div 
+        className={`bg-white rounded-md shadow-lg w-full ${getMaxWidthClass()} max-h-[90vh] overflow-y-auto relative`}
         onClick={e => e.stopPropagation()}
       >
         <div className="p-4 sm:p-6">

@@ -8,7 +8,7 @@ import authService from '../../services/AuthServices';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Logo from "../../assets/Auth/Logo.png";
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 
 function SignUp() {
@@ -36,16 +36,29 @@ function SignUp() {
         return;
     }
     
-    toast.info('Processing signup...', { autoClose: 2000 });
+    // toast.info('Processing signup...', { autoClose: 2000 });
     
-    authService.signup(signupData)
-      .then(response => {
-        toast.success('Signup successful! Please log in.');
-        setTimeout(() => navigate('/login'), 2000);
-      })
-      .catch(error => {
-        toast.error(error.message || 'Signup failed. Please try again.');
-      });
+    // authService.signup(signupData)
+    //   .then(response => {
+    //     toast.success('Signup successful! Please log in.');
+    //     setTimeout(() => navigate('/login'), 2000);
+    //   })
+    //   .catch(error => {
+    //     toast.error(error.message || 'Signup failed. Please try again.');
+    //   });
+
+    toast.promise(
+                ()=>(new Promise((resolve, reject) => (
+                  setTimeout(() => {
+                  resolve()
+                  navigate('/login')
+                  }, 1000)
+                ))),
+                {
+                  loading: 'Saving...',
+                  success: <b>Signup Successful!</b>,
+                }
+                );
         
     }
 

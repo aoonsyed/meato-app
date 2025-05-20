@@ -187,7 +187,7 @@ function LandingPage() {
     <div className='relative h-screen w-full max-h-screen flex flex-col justify-center items-center'>
       <div className='absolute top-0 left-0 w-full h-full bg-center bg-cover bg-no-repeat -z-10'
         style={{ 
-          backgroundImage: `url(https://scontent.fkhi6-1.fna.fbcdn.net/v/t39.30808-6/470806456_422666037593212_8020836989761765538_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EXE6AUC2EkMQ7kNvwH5Layv&_nc_oc=AdlqILPpiNI0fqndREaxIbyhQ07dEUGBS5Xvql9dTp1WMwhPfeMIUgTwee9mU6WQi2I&_nc_zt=23&_nc_ht=scontent.fkhi6-1.fna&_nc_gid=MKyJ1QPm4FF0DKm96TWKug&oh=00_AfI8Zir1RXFgqL3TuH-iOGRn9wibnsilddpH6WBLwlWNLw&oe=68293612)`}} 
+          backgroundImage: `url(${BG})`,}} 
       >
         <div className='absolute top-0 left-0 w-full h-full bg-[#000000] opacity-60'/>
       </div>
@@ -252,6 +252,7 @@ function LandingPage() {
     <ProductGrid
     title={"Popular Products"}
     products={popularProducts}
+    id={"popular"}
     />
     {/* Popular Products End */}
 

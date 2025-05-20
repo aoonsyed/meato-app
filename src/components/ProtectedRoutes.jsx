@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Outlet, useNavigate, Navigate } from 'react-router'
 import { jwtDecode } from 'jwt-decode'
 import { logout } from '../store/authSlice'
 
 function ProtectedRoutes() {
+    const [redirect, setRedirect] = useState(false)
     const dispatch = useDispatch()
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
     const user = useSelector((state) => state.auth.user)
@@ -21,28 +22,25 @@ function ProtectedRoutes() {
                     if (decodedToken.exp <= currentTime) {
                         console.log('Token expired, logging out')
                         dispatch(logout())
-                        navigate('/login')
+                        setRedirect(true)
                     }
                 } catch (error) {
                     console.log('Invalid token, logging out')
                     dispatch(logout())
-                    navigate('/login')
+                    setRedirect(true)
                 }
             } else {
                 dispatch(logout())
-                navigate('/login')
+                setRedirect(true)
             }
+        } else {
+            setRedirect(true)
         }
-        else{
-           navigate('/login')
-        }
-    }, [isAuthenticated, user, dispatch, navigate])
-    
-    // if (!isAuthenticated) {
-    //     return <Navigate to="/login" replace />
-    // }
-    
-    return <Outlet />
+    }, [isAuthenticated, user, dispatch])
+
+    return (
+        redirect ? <Navigate to="/login" replace /> : <Outlet />
+    )
 }
 
 export default ProtectedRoutes

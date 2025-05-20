@@ -3,6 +3,7 @@ import RoundedDiv from '../../components/RoundedDiv'
 import Custom_Main_Button from "../../components/Custom_Main_Button"
 import meatBG from "../../assets/landingPage/meatBG.jpg"
 
+import { FaEnvelope, FaWhatsapp, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 function ContactUs() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -26,9 +27,9 @@ function ContactUs() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-10 px-4 min-h-screen pt-36 md:pt-28 relative">
+    <div className="flex flex-col md:flex-row items-center justify-between py-10 px-4 md:px-10 lg:px-20 min-h-screen max-w-7xl mx-auto pt-10 md:pt-0 md:h-screen">
 
-    <div className='absolute top-12 left-0 w-full h-full bg-center -z-10'
+      <div className='fixed inset-0 w-full h-full bg-center -z-10'
                   style={{ 
                     backgroundImage: `url(${meatBG})`,
                     backgroundSize: 'cover',
@@ -38,41 +39,95 @@ function ContactUs() {
     <div className='absolute top-0 left-0 w-full h-full bg-[#000000] opacity-60'/>
     </div>
 
-      <h1 className="text-4xl font-bold mb-4 text-white">Contact Us</h1>
-      
+
+      {/* Left Section: Contact Information */}
+      <div className="flex flex-col items-start justify-evenly w-full md:w-1/2 pr-0 md:pr-8 mb-8 md:mb-0 h-auto text-white">
+        <div className='my-5'>
+          <h1 className="text-4xl font-bold mb-6">Get In Touch</h1>
+          <p className="mb-8 font-semibold text-2xl">Contact us if you have more questions.</p>
+        </div>
+
+        <div className="flex flex-col gap-6 w-full">
+          <div className="flex items-center gap-4">
+            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
+              <FaEnvelope className="text-white text-xl" />
+            </div>
+            <div>
+              <p className="font-semibold text-xl">Email</p>
+              <p className="font-medium">meatappexample@gmail.com</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
+              <FaWhatsapp className="text-white text-xl" />
+            </div>
+            <div>
+              <p className="font-semibold text-xl">Messages</p>
+              <p className="font-medium">Send us a message on WhatsApp:</p>
+              <p className="font-medium">+12345678910</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
+              <FaPhone className="text-white text-xl" />
+            </div>
+            <div>
+              <p className="font-semibold text-xl">Phone</p>
+              <p className="font-medium">+12345678910</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
+              <FaMapMarkerAlt className="text-white text-xl" />
+            </div>
+            <div>
+              <p className="font-semibold text-xl">Address</p>
+              <p className="font-medium">1234 Elm Street, Apt. 5B, Springfield, IL</p>
+              <p className="font-medium">62704, USA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Section: Form */}
       <RoundedDiv 
-        className="p-8 w-full max-w-2xl"
-        width="100%"
+        className="p-8 !w-full md:!w-1/2 shadow-lg bg-white"
+        // width="100%"
         height="auto"
       >
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="fullName" className="block mb-1 text-sm">Full Name</label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-                className="w-full border border-gray-300 rounded p-2"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block mb-1 text-sm">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                className="w-full border border-gray-300 rounded p-2"
-                required
-              />
-            </div>
+        <h1 className='font-bold text-center text-3xl mb-1'>Submit Your Query</h1>
+        <p className='font-normal text-center text-sm mb-6'>Ask anything and we will respond quickly</p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <div>
+            <label htmlFor="fullName" className="block mb-1 text-sm">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Enter your full name"
+              className="w-full border border-gray-200 rounded p-2.5"
+              required
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="email" className="block mb-1 text-sm">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="w-full border border-gray-200 rounded p-2.5"
+              required
+            />
           </div>
           
           <div>
@@ -84,7 +139,7 @@ function ContactUs() {
               value={formData.subject}
               onChange={handleChange}
               placeholder="Write a subject"
-              className="w-full border border-gray-300 rounded p-2"
+              className="w-full border border-gray-200 rounded p-2.5"
               required
             />
           </div>
@@ -97,16 +152,27 @@ function ContactUs() {
               value={formData.message}
               onChange={handleChange}
               placeholder="Write your message..."
-              className="w-full border border-gray-300 rounded p-2 min-h-[150px]"
+              className="w-full border border-gray-200 rounded p-2.5 min-h-[120px]"
               required
             />
           </div>
           
-          <Custom_Main_Button
-            type="submit"
-            className="bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded-full mt-4 mx-auto w-full max-w-[200px]"
-            text='Send'
-          />
+          <div className="flex justify-between mt-4">
+            <button 
+              type="button" 
+              className="border border-[#FFB752] rounded-full py-2 px-8 text-[#AE1F25] font-semibold hover:bg-gray-50 cursor-pointer w-[45%]"
+              onClick={() => setFormData({fullName: '', email: '', subject: '', message: ''})}
+            >
+              Cancel
+            </button>
+            
+            <Custom_Main_Button
+              type="submit"
+              className="bg-red-700 hover:bg-red-800 text-white py-2 px-8 rounded-full"
+              width='45%'
+              text='Send'
+            />
+          </div>
         </form>
       </RoundedDiv>
     </div>

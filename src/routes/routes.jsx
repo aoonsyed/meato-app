@@ -17,6 +17,7 @@ import ProductPage from "../pages/product/ProductPage";
 import NewsPage from "../pages/News/NewsPage";
 import News from "../pages/News/News";
 import SellWithUsPge from "../pages/LandingPages/SellWithUsPge";
+import MyProfile from "../pages/Profile/MyProfile";
 
 
 
@@ -27,27 +28,29 @@ const router = createBrowserRouter(
 
         {/* Unprotected Routes */}
         <Route element={<UnprotectedRoutes/>}>
-        <Route path="/login" element={<Login/>} />,
-        <Route path="/signup" element={<SignUp/>} />,
-        <Route path="/forgot-password" element={<ForgotPassword/>} />,
-        <Route path="/verify-code" element={<VerifyCode/>} />,
-        <Route path="/reset-password" element={<ResetPassword/>} />,
+            <Route path="/login" element={<Login/>} />,
+            <Route path="/signup" element={<SignUp/>} />,
+            <Route path="/forgot-password" element={<ForgotPassword/>} />,
+            <Route path="/verify-code" element={<VerifyCode/>} />,
+            <Route path="/reset-password" element={<ResetPassword/>} />,
         </Route>
-        <Route element={<LandingLayout/>}>
-            <Route path="/" element={<LandingPage/>}/>,
-            <Route path="/about" element={<AboutUs/>}/>
-            <Route path="/services" element={<Services/>}/>
-            <Route path="/contact" element={<ContactUs/>}/>,
-            <Route path="/product/:id" element={<ProductPage/>}/>,
-            <Route path="/news/" element={<NewsPage/>}/>,
-            <Route path="/news/:id" element={<News/>}/>,
-            <Route path="/sell" element={<SellWithUsPge/>}/>,
-        </Route>
-
-
         {/* Protected Routes */}
-        {/* <Route element={<ProtectedRoutes />}>
-        </Route> */}
+        <Route element={<LandingLayout/>}>
+            <Route element={<ProtectedRoutes />}>
+                <Route path="/" element={<LandingPage/>}/>,
+                <Route path="/about" element={<AboutUs/>}/>
+                <Route path="/services" element={<Services/>}/>
+                <Route path="/contact" element={<ContactUs/>}/>,
+                <Route path="/product/:id" element={<ProductPage/>}/>,
+                <Route path="/news/" element={<NewsPage/>}/>,
+                <Route path="/news/:id" element={<News/>}/>,
+                <Route path="/sell" element={<SellWithUsPge/>}/>,
+                <Route path="/profile" element={<MyProfile/>}/>,
+                
+            </Route>
+        </Route>
+
+
 
         </>
     )
