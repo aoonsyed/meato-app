@@ -21,7 +21,7 @@ function UnprotectedRoutes() {
     // }
 
     if (isAuthenticated) {
-        return <Navigate to="/profile" replace />
+        return <Navigate to="/" replace />
     }
 
     return <Outlet />

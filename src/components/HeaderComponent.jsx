@@ -26,6 +26,7 @@ const HeaderComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   
   // Add state for scroll handling
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -119,7 +120,12 @@ const HeaderComponent = () => {
             
             {/* Account Icon */}
             <button className="text-white">
-              <img src={account} alt="Search Icon" className="h-7 w-7 cursor-pointer hover:scale-110 transition-transform duration-200" onClick={()=> navigate("/login")}/>
+              <img src={account} alt="Search Icon" className="h-7 w-7 cursor-pointer hover:scale-110 transition-transform duration-200" onClick={()=> {
+                isAuthenticated?
+                navigate("/profile"):
+                navigate("/login")
+              }
+              }/>
             </button>
             
             {/* Cart Icon */}
