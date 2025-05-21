@@ -35,8 +35,8 @@ const router = createBrowserRouter(
             <Route path="/reset-password" element={<ResetPassword/>} />,
         </Route>
         {/* Protected Routes */}
-        <Route element={<LandingLayout/>}>
-            <Route element={<ProtectedRoutes />}>
+        <Route element={<ProtectedRoutes />}>
+            <Route element={<LandingLayout/>}>
                 <Route path="/" element={<LandingPage/>}/>,
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/services" element={<Services/>}/>
@@ -46,7 +46,6 @@ const router = createBrowserRouter(
                 <Route path="/news/:id" element={<News/>}/>,
                 <Route path="/sell" element={<SellWithUsPge/>}/>,
                 <Route path="/profile" element={<MyProfile/>}/>,
-                
             </Route>
         </Route>
 

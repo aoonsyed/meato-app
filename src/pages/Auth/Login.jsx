@@ -101,7 +101,7 @@ function Login() {
 
           <div className='text-center mb-4'>
           <h2 className='text-center text-4xl mb-2 font-bold'>Login</h2>
-          <p className='font-normal'>Welcome to Meato-App</p>
+          <p className='font-normal'>Welcome to Meat Expert</p>
           </div>
           <InputField
             placeholder="Enter your email"
