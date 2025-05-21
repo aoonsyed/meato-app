@@ -64,7 +64,7 @@ const FooterComponent = () => {
             
             <div className="flex items-center mb-4 gap-2">
               <img src={email} alt="Email icon" className="w-5 h-5" />
-              <a href="mailto:meatapp@gmail.com" className="text-red-500">meatexpert@gmail.com</a>
+              <a href="mailto:meatexpert@gmail.com" className="text-red-500">meatexpert@gmail.com</a>
             </div>
             
             <div className="flex items-center mb-6 gap-2">

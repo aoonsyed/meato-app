@@ -583,7 +583,7 @@ function Services() {
           {
             id: 3,
             name: 'Chicken Burger Patty',
-            weight: '300g (4 pieces)',
+            weight: '300g',
             price: 249.00,
             originalPrice: 299.00,
             image: muttonChopsImage,
