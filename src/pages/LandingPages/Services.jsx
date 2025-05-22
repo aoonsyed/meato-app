@@ -613,7 +613,7 @@ function Services() {
         <>
         <div className='container mx-auto overflow-hidden'>
             <div className='mx-10'>
-                <div className='mt-32'>
+                <div className='mt-16'>
                     <ImageCarousal carousal={carousal} btnOnClick={onClick}/>
                 </div>
             </div>

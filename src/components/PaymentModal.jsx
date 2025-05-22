@@ -74,7 +74,7 @@ function PaymentModal({ isOpen, onClose, onSavePayment }) {
 
   // Form submission handler
   const onSubmit = (data) => {
-    toast.success('Payment details saved successfully!');
+    toast.success('Order placed successfully!');
     onSavePayment({ paymentMethod, ...(paymentMethod === 'online' ? data : {}) });
     onClose();
   };
@@ -82,7 +82,7 @@ function PaymentModal({ isOpen, onClose, onSavePayment }) {
   // Handle submission for cash payment (no validation needed)
   const handleCashSubmit = (e) => {
     e.preventDefault();
-    toast.success('Cash on delivery option selected!');
+    toast.success('Order placed successfully!');
     onSavePayment({ paymentMethod: 'cash' });
     onClose();
   };

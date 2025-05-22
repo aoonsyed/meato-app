@@ -111,17 +111,17 @@ function ShippingModal({ isOpen, onClose, deliveryDetails, setIsDeliveryModalOpe
             <div className="space-y-2">
               <div className="flex justify-between">
                 <p className="text-sm">Subtotal ({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'})</p>
-                <p>${subtotal.toFixed(2)}</p>
+                <p>AED {subtotal.toFixed(2)}</p>
               </div>
               
               <div className="flex justify-between">
                 <p className="text-sm">Shipping Fee</p>
-                <p>$0</p>
+                <p>AED 0</p>
               </div>
               
               <div className="flex justify-between pt-2 border-t border-gray-200">
                 <p className="font-semibold">Total</p>
-                <p className="font-bold">${subtotal.toFixed(2)}</p>
+                <p className="font-bold">AED {subtotal.toFixed(2)}</p>
               </div>
             </div>
           </div>
@@ -164,7 +164,7 @@ function ShippingModal({ isOpen, onClose, deliveryDetails, setIsDeliveryModalOpe
                 </div> }
                 
                 <div className="mt-4 p-4 border border-gray-200 rounded-md">
-                  <p className="text-red-600 font-bold text-xl">${topProduct.price.toFixed(2)}</p>
+                  <p className="text-red-600 font-bold text-xl">AED {topProduct.price.toFixed(2)}</p>
                   <div className="mt-2">
                     <p className="text-sm">Quantity : {topProduct.quantity}Kg</p>
                     <p className="text-sm text-gray-600">Est. arrival 1-3 hour</p>

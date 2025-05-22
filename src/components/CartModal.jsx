@@ -91,7 +91,7 @@ function CartModal({ onClose, cart }) {
                     +
                   </button>
                 </div>
-                <p className="font-medium text-sm">${(item.price * item.quantity).toFixed(2)}</p>
+                <p className="font-medium text-sm">AED {(item.price * item.quantity).toFixed(2)}</p>
               </div>
             </div>
           </div>
@@ -104,17 +104,17 @@ function CartModal({ onClose, cart }) {
           <div className="flex justify-between items-center">
             <p className="text-sm">Subtotal ({cart.length} {cart.length === 1 ? 'Item' : 'Items'})</p>
             <div className='border-b border-dashed border-[#D8D8D8s] flex-grow mx-5'></div> 
-            <p className="font-medium">${subtotal.toFixed(2)}</p>
+            <p className="font-medium">AED {subtotal.toFixed(2)}</p>
           </div>
           <div className="flex justify-between items-center">
             <p className="text-sm">Shipping Fee</p>
             <div className='border-b border-dashed border-[#D8D8D8s] flex-grow mx-5'></div> 
-            <p className="font-medium">$0</p>
+            <p className="font-medium">AED  0</p>
           </div>
           <div className="flex justify-between items-center pt-2 border-t border-gray-100">
             <p className="font-medium">Total</p>
             <div className='border-b border-dashed border-[#D8D8D8s] flex-grow mx-5'></div> 
-            <p className="font-bold">${subtotal.toFixed(2)}</p>
+            <p className="font-bold">AED {subtotal.toFixed(2)}</p>
           </div>
           
           <div className="pt-4 flex justify-center">
