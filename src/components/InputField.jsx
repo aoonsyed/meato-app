@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import eye from "../assets/Auth/eye.svg";
 import eyeOff from "../assets/Auth/eyeOff.png";
 
-const InputField = ({
+const InputField = forwardRef(({
     variant = "grey",
     borderWidth = "0.5px",
     placeholder = "",
@@ -12,21 +12,21 @@ const InputField = ({
     type = "text",
     textColor = "#636363",
     fontSize = "14px",
-    value = "",
-    onChange = () => {},
+    value,
+    onChange,
     onKeyDown = () => {},
-    ref = null,
     id = null,
     labelName = null,
     compulsory = false,
     labelClassName = "",
+    name,
     ...props
-}) => {
+}, ref) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const variants = {
-        grey: "border-[#D8D8D8] border",
-        red: "border-[#AE1F25] border"
+        grey: "border-[#D8D8D8] border focus:border-black focus:outline-none",
+        red: "border-[#AE1F25] border focus:border-red-500 focus:outline-none"
     };
 
     const borderStyle = {
@@ -49,10 +49,17 @@ const InputField = ({
     };
 
     const inputType = type === "password" ? (passwordVisible ? "text" : "password") : type;
+    
+    // Handle React Hook Form's register method input
+    const handleChangeWithRegister = (e) => {
+        if (onChange) {
+            onChange(e);
+        }
+    };
 
     return (
         <>
-            {labelName && <label htmlFor={id} className={`font-medium ${labelClassName}`}>{labelName}{compulsory && <span className='text-red-500'>*</span>}</label>}
+            {labelName && <label htmlFor={id || name} className={`font-medium ${labelClassName}`}>{labelName}{compulsory && <span className='text-red-500'>*</span>}</label>}
             <div className="relative">
                 <input
                     type={inputType}
@@ -60,11 +67,12 @@ const InputField = ({
                     className={`${baseStyle} ${variants[variant]} ${className} ${type === "password" ? "pr-10" : ""}`}
                     placeholder={placeholder}
                     value={value}
-                    onChange={onChange}
+                    onChange={handleChangeWithRegister}
                     onKeyDown={onKeyDown}
                     ref={ref}
+                    id={id || name}
+                    name={name}
                     {...props}
-                    id={id}
                 />
                 {type === "password" && (
                     <button
@@ -79,6 +87,7 @@ const InputField = ({
             </div>
         </>
     );
-}
+});
 
+InputField.displayName = 'InputField';
 export default InputField;

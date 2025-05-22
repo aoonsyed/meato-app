@@ -94,7 +94,7 @@ const HeaderComponent = () => {
 
         </div>
 
-        <div className="flex h-12 bg-[#636363] items-center justify-between px-4 md:px-8 relative">
+        <div className="flex h-12 bg-[#858585] items-center justify-between px-4 md:px-8 relative">
           {/* Logo */}
           <div className="flex items-center">
             <img src={logo} alt="Logo" className="h-11" />

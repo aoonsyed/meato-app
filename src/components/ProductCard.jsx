@@ -3,6 +3,7 @@ import CustomMainButton from './Custom_Main_Button';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
+import toast from 'react-hot-toast';
 
 const ProductCard = ({ image, name, weight, price, originalPrice, id }) => {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ const ProductCard = ({ image, name, weight, price, originalPrice, id }) => {
       image,
       quantity: 1
     }));
-  };
-  
+    toast.success('Product added to cart!');
+  }
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer" onClick={handleClick}>
       <div className="h-48 overflow-hidden">
@@ -40,10 +41,10 @@ const ProductCard = ({ image, name, weight, price, originalPrice, id }) => {
         </h3>
         <div className="flex items-center justify-between mt-5">
           <div className='flex flex-col items-center justify-center font-semibold text-sm'>
-            <span className="font-bold text-[#AD1F23]">$ {price.toFixed(2)}</span>
+            <span className="font-bold text-[#AD1F23]">AED {price.toFixed(2)}</span>
             {originalPrice && (
               <span className="text-sm text-gray-400 line-through ml-2">
-                $ {originalPrice.toFixed(2)}
+              AED {originalPrice.toFixed(2)}
               </span>
             )}
           </div>

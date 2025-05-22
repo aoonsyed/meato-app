@@ -77,15 +77,17 @@ const ProductGrid = ({title, products, id}) => {
           <div className="flex space-x-4">
             <button 
               onClick={isMobile ? scrollLeft : goToPreviousPage}
-              className={`p-2 rounded-full hover:opacity-50 hover:cursor-pointer`}
+              className={`p-2 rounded-full ${currentPage === 0 && !isMobile ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-50 hover:cursor-pointer'}`}
               aria-label="Previous page or scroll left"
+              disabled={currentPage === 0 && !isMobile}
             >
               <img src={LeftBtn} alt="Previous" className="w-8 h-8" />
             </button>
             <button 
               onClick={isMobile ? scrollRight : goToNextPage}
-              className={`p-2 rounded-full hover:opacity-50 hover:cursor-pointer`}
+              className={`p-2 rounded-full ${currentPage === totalPages - 1 && !isMobile ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-50 hover:cursor-pointer'}`}
               aria-label="Next page or scroll right"
+              disabled={currentPage === totalPages - 1 && !isMobile}
             >
               <img src={RightBtn} alt="Next" className="w-8 h-8" />
             </button>

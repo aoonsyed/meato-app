@@ -9,48 +9,55 @@ import 'react-phone-input-2/lib/style.css'
 import '../../styles/phoneInput.css'
 import meatBG from "../../assets/landingPage/meatBG.jpg"
 import removeIcon from "../../assets/cart/Remove.png"
+import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { sellWithUsSchema } from '../../utils/validationSchemas'
 
 function SellWithUsPge() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    shopName: '',
-    phoneNumber: '',
-    email: '',
-    city: '',
-    message: '',
-    meatTypes: {
-      Chicken: false,
-      Beef: false,
-      Mutton: false,
-      Rabbit: false,
-      Camel: false,
-      Duck: false,
-      Fish: false,
-      Turkey: false,
-      Lamb: false,
-      Pigeon: false
+  const navigate = useNavigate();
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  
+  const { 
+    control, 
+    register, 
+    handleSubmit: handleFormSubmit, 
+    formState: { errors }, 
+    setValue, 
+    watch 
+  } = useForm({
+    resolver: yupResolver(sellWithUsSchema),
+    defaultValues: {
+      fullName: '',
+      shopName: '',
+      phoneNumber: '',
+      email: '',
+      city: '',
+      message: '',
+      meatTypes: {
+        Chicken: false,
+        Beef: false,
+        Mutton: false,
+        Rabbit: false,
+        Camel: false,
+        Duck: false,
+        Fish: false,
+        Turkey: false,
+        Lamb: false,
+        Pigeon: false
+      }
     }
   });
   
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-  
-  const handlePhoneChange = (phone) => {
-    setFormData(prev => ({ ...prev, phoneNumber: phone }));
-  };
+  const watchMeatTypes = watch("meatTypes");
   
   const handleMeatTypeChange = (type) => {
-    setFormData(prev => ({
-      ...prev,
-      meatTypes: {
-        ...prev.meatTypes,
-        [type]: !prev.meatTypes[type]
-      }
-    }));
+    setValue(
+      `meatTypes.${type}`, 
+      !watchMeatTypes[type], 
+      { shouldValidate: true }
+    );
   };
   
   const handleFileChange = (e) => {
@@ -63,10 +70,35 @@ function SellWithUsPge() {
     setSelectedFiles(prevFiles => prevFiles.filter((_, index) => index !== indexToRemove));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData, selectedFiles);
+  const onSubmit = (data) => {
+    if (selectedFiles.length === 0) {
+      toast.error('Please upload at least one photo.');
+      return;
+    }
+
+    // Form data and selected files are valid
+    console.log('Form submitted:', data, selectedFiles);
+
+    toast.success('Application submitted successfully!', {
+      duration: 3500,
+    });
     
+    // Reset form
+    setValue('fullName', '');
+    setValue('shopName', '');
+    setValue('phoneNumber', '');
+    setValue('email', '');
+    setValue('city', '');
+    setValue('message', '');
+    
+    // Reset meat types
+    Object.keys(watchMeatTypes).forEach(type => {
+      setValue(`meatTypes.${type}`, false);
+    });
+    
+    setSelectedFiles([]);
+    
+    navigate('/');
   };
 
   return (
@@ -104,7 +136,7 @@ function SellWithUsPge() {
           />
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleFormSubmit(onSubmit)} className="space-y-6">
           {/* Full Name and Shop Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -115,14 +147,15 @@ function SellWithUsPge() {
                 compulsory={true}
                 id={"fullName"}
                 name={"fullName"}
-                required
-                value={formData.fullName}
-                onChange={handleChange}
+                {...register("fullName")}
                 width='100%'
                 height='40px'
-                className='!p-4 md:!p-5 my-0.5'
+                className={`!p-4 md:!p-5 my-0.5 ${errors.fullName ? 'border-red-500' : ''}`}
                 labelClassName='text-sm font-medium'
               />
+              {errors.fullName && (
+                <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>
+              )}
             </div>
             <div>
               <InputField 
@@ -132,14 +165,15 @@ function SellWithUsPge() {
                 compulsory={true}
                 id={"shopName"}
                 name={"shopName"}
-                required
-                value={formData.shopName}
-                onChange={handleChange}
+                {...register("shopName")}
                 width='100%'
                 height='40px'
-                className='!p-4 md:!p-5 my-0.5'
+                className={`!p-4 md:!p-5 my-0.5 ${errors.shopName ? 'border-red-500' : ''}`}
                 labelClassName='text-sm font-medium'
               />
+              {errors.shopName && (
+                <p className="text-red-500 text-xs mt-1">{errors.shopName.message}</p>
+              )}
             </div>
           </div>
           
@@ -151,33 +185,43 @@ function SellWithUsPge() {
                 className='text-sm font-medium'>
                 Phone Number <span className='text-red-500'>*</span>
               </label>
-              <PhoneInput
-                country={'pk'}
-                value={formData.phoneNumber}
-                onChange={handlePhoneChange}
-                inputClass="focus:ring-2 focus:ring-primary focus:border-primary"
-                containerClass="my-0.5"
-                searchClass="focus:ring-2 focus:ring-primary focus:border-primary"
-                buttonClass="hover:bg-gray-50"
-                enableSearch={true}
-                disableSearchIcon={true}
-                disableCountryGuess={true}
-                searchPlaceholder="Search countries"
-                disableDropdown={false}
-                countryCodeEditable={true}
-                enableClickOutside={true}
-                disableCountryCode={false}
-                enableAreaCodes={false}
-                onlyCountries={[]}
-                preferredCountries={['pk', 'us', 'gb', 'ca', 'au']}
-                inputProps={{
-                  name: 'phoneNumber',
-                  id: 'phoneNumber',
-                  required: true,
-                  placeholder: 'Enter your phone number',
-                  onWheel: (e) => e.target.blur(),
-                }}
+              <Controller
+                name="phoneNumber"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <PhoneInput
+                    country={'pk'}
+                    value={value}
+                    onChange={onChange}
+                    inputClass={`focus:ring-2 focus:ring-primary ${errors.phoneNumber ? 'border-red-500' : 'focus:border-primary'}`}
+                    containerClass="my-0.5"
+                    searchClass="focus:ring-2 focus:ring-primary focus:border-primary"
+                    buttonClass="hover:bg-gray-50"
+                    enableSearch={true}
+                    disableSearchIcon={true}
+                    disableCountryGuess={false}
+                    autoFormat={true}
+                    searchPlaceholder="Search countries"
+                    disableDropdown={false}
+                    countryCodeEditable={true}
+                    enableClickOutside={true}
+                    disableCountryCode={false}
+                    enableAreaCodes={false}
+                    onlyCountries={[]}
+                    preferredCountries={['pk', 'us', 'gb', 'ca', 'au']}
+                    inputProps={{
+                      name: 'phoneNumber',
+                      id: 'phoneNumber',
+                      required: true,
+                      placeholder: 'Enter your phone number',
+                      onWheel: (e) => e.target.blur(),
+                    }}
+                  />
+                )}
               />
+              {errors.phoneNumber && (
+                <p className="text-red-500 text-xs mt-1">{errors.phoneNumber.message}</p>
+              )}
             </div>
             <div>
               <InputField 
@@ -187,14 +231,15 @@ function SellWithUsPge() {
                 compulsory={true}
                 id={"email"}
                 name={"email"}
-                required
-                value={formData.email}
-                onChange={handleChange}
+                {...register("email")}
                 width='100%'
                 height='40px'
-                className='!p-4 md:!p-5 my-0.5'
+                className={`!p-4 md:!p-5 my-0.5 ${errors.email ? 'border-red-500' : ''}`}
                 labelClassName='text-sm font-medium'
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+              )}
             </div>
           </div>
           
@@ -202,12 +247,9 @@ function SellWithUsPge() {
           <div>
             <label htmlFor='city' className='text-sm font-medium'>City <span className='text-red-500'>*</span></label>
             <select 
-              name="city" 
               id="city" 
-              value={formData.city}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-md h-[40px] px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary my-0.5 cursor-pointer"
+              {...register("city")}
+              className={`w-full border ${errors.city ? 'border-red-500' : 'border-gray-300'} rounded-md h-[40px] px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary my-0.5 cursor-pointer`}
             >
               <option value="">Select your city</option>
               <option value="Karachi">Karachi</option>
@@ -216,47 +258,54 @@ function SellWithUsPge() {
               <option value="New York">New York</option>
               <option value="London">London</option>
             </select>
+            {errors.city && (
+              <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>
+            )}
           </div>
           
           {/* Meat Types */}
           <div>
             <label className='text-sm font-medium'>
-              Meat Types You Sell
+              Meat Types You Sell <span className='text-red-500'>*</span>
             </label>
             <div className="flex flex-wrap mt-2">
-              {Object.keys(formData.meatTypes).map((type) => (
+              {Object.keys(watchMeatTypes).map((type) => (
                 <MeatTypeCheckbox
                   key={type}
                   type={type}
-                  checked={formData.meatTypes[type]}
+                  checked={watchMeatTypes[type]}
                   onChange={() => handleMeatTypeChange(type)}
                 />
               ))}
             </div>
+            {errors.meatTypes && (
+              <p className="text-red-500 text-xs mt-1">{errors.meatTypes.message}</p>
+            )}
           </div>
           
           {/* Message */}
           <div>
             <label htmlFor="message" className='text-sm font-medium'>
-              Message / About Your Shop
+              Message / About Your Shop <span className='text-red-500'>*</span>
             </label>
             <textarea
               id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
+              {...register("message")}
               placeholder="Write your message..."
-              className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary my-0.5 min-h-[120px]"
+              className={`w-full border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary my-0.5 min-h-[120px]`}
             />
+            {errors.message && (
+              <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
+            )}
           </div>
           
           {/* Upload Photos */}
           <div>
             <label htmlFor="photos" className='text-sm font-medium'>
-              Upload Photos
+              Upload Photos <span className='text-red-500'>*</span>
             </label>
-            <div className="mt-1">
-              <label className="flex w-full  px-4 transition bg-white border-2 border-gray-300 rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none flex-wrap h-auto">
+            <div className={`mt-1 ${selectedFiles.length === 0 ? 'border-red-500' : ''}`}>
+              <label className={`flex w-full px-4 transition bg-white border-2 ${selectedFiles.length === 0 && errors.meatTypes ? 'border-red-500' : 'border-gray-300'} rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none flex-wrap h-auto`}>
                 { selectedFiles.length === 0 &&
                 <div className='bg-[#D8D8D8] flex items-center justify-center rounded-xl m-1 px-3 '>
                   <span>

@@ -226,7 +226,7 @@ function LandingPage() {
               <img src={DeliveryImg} alt="Fast delivery illustration" className='h-auto max-h-full' />
             </div>
             <h3 className='text-xl font-bold mb-2'>Fastest Delivery</h3>
-            <p>Delivery that is always ontime even faster</p>
+            <p>Delivery that is always on time even faster</p>
           </div>
 
           

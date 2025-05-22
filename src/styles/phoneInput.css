@@ -15,6 +15,16 @@
   outline: none !important;
 }
 
+/* Error state styling */
+.phone-error .form-control {
+  border-color: #ef4444 !important; /* red-500 */
+}
+
+.phone-error .form-control:focus {
+  border-color: #ef4444 !important; /* red-500 */
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important; /* red-500 with lower opacity */
+}
+
 .react-tel-input .flag-dropdown {
   background-color: white !important;
   border: 1px solid #d1d5db !important;

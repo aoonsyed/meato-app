@@ -14,6 +14,7 @@ import "../styles/carousel.css";
 function ServicesCategoryCarousal({setSelectedCategory, prodRef}) {
 
    function handleCategoryClick(e) {
+        // console.log(e);
         setSelectedCategory(e.target.alt);
         prodRef.current.scrollIntoView({
             behavior: 'smooth',

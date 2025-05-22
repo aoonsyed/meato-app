@@ -5,14 +5,14 @@ import landingBG from "../assets/landingPage/LandingBG.png";
 
 function AuthLayout({ children }) {
   return (
-    <div className="md:flex h-screen w-screen font-roboto">
+    <div className="md:flex h-screen w-full max-w-full overflow-x-hidden font-roboto">
       <div 
         className="hidden md:block h-full w-1/2 bg-cover bg-no-repeat bg-center"
         style={{ backgroundImage: `url(${LandingSide})` }}
       />
 
       <div className="flex flex-col h-screen bg-white max-w-dvw relative md:flex-grow">
-        <div className="flex-grow flex flex-col z-10">
+        <div className="flex-grow flex flex-col z-10 overflow-y-auto">
           {children}
         </div>
 

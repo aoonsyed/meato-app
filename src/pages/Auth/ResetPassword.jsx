@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputField from '../../components/InputField';
 import RoundedDiv from '../../components/RoundedDiv';
 import CustomMainButton from '../../components/Custom_Main_Button';
@@ -6,63 +6,42 @@ import { useNavigate } from 'react-router';
 import ResetLayout from '../../layouts/ResetLayout';
 import ResetHero from '../../assets/Auth/ResetHero.png';
 import { useLocation } from 'react-router';
-import api from '../../services/ApiCall';
 import Logo from '../../assets/Auth/Logo.png';
 import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { resetPasswordSchema } from '../../utils/validationSchemas';
 
 function ResetPassword() {
   const location = useLocation();
   const code = location.state?.code || '';
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+    // Initialize react-hook-form
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } 
+  } = useForm({
+    resolver: yupResolver(resetPasswordSchema)
+  });
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleReset = () => {
-
-    if (!password || !confirmPassword) {
-      toast.error('Please fill in all fields.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      toast.error('Passwords do not match.');
-      return;
-    }
-
+  // Form submission handler
+  const onSubmit = (data) => {
+    // In a real implementation, you would call your API here
     // api.post('accounts/changepassword/', {
     //   "otp": code,
-    //   "password": password
+    //   "password": data.password
     // })
-    // .then(response => {
-    //   if (response.status === 200) {
-    //     toast.success('Password reset successfully!');
-    //     navigate('/login');
-    //   } else if (response.status === 400) {
-    //     toast.error('Invalid OTP. Please try again.');
-    //     navigate('/verify-code');
-    //   } 
-    //   else {
-    //     toast.error(response.msg || 'An error occurred. Please try again later.');
-    //   }
-    // })
-
+    // .then(...)
+    // .catch(...)
+    
     toast.success('Password reset successfully!');
-        navigate('/login');
-
+    navigate('/login');
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleReset();
+      handleSubmit(onSubmit)();
     }
   };
 
@@ -84,44 +63,49 @@ function ResetPassword() {
             you can login and access all the features.
           </p>
           
-          
-          <div>
-            <InputField
-              placeholder="Password"
-              type="password"
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <InputField
+                placeholder="Password"
+                type="password"
+                width="100%"
+                className={`mb-1 ${errors.password ? 'border-red-500' : ''}`}
+                variant={errors.password ? 'red' : 'grey'}
+                {...register('password')}
+                onKeyDown={handleKeyDown}
+                id="password"
+                labelName="Password"
+                compulsory={true}
+                labelClassName='my-1'
+              />
+              {errors.password && <p className="text-red-500 text-xs mt-1 mb-2">{errors.password.message}</p>}
+            </div>
+            
+            <div>
+              <InputField
+                placeholder="Confirm Password"
+                type="password"
+                width="100%"
+                className={`mb-1 ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                variant={errors.confirmPassword ? 'red' : 'grey'}
+                {...register('confirmPassword')}
+                onKeyDown={handleKeyDown}
+                id="confirm_password"
+                labelName="Confirm Password"
+                compulsory={true}
+                labelClassName='my-1'
+              />
+              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1 mb-4">{errors.confirmPassword.message}</p>}
+            </div>
+            
+            <CustomMainButton
+              text="Reset Password"
+              variant="primary"
               width="100%"
-              className="mb-3 mt-1"
-              value={password}
-              onChange={handlePasswordChange}
-              onKeyDown={handleKeyDown}
-              id={"password"}
-              labelName={"Password"}
-              compulsory={true}
+              className="mb-4 mt-4"
+              type="submit"
             />
-          </div>
-          
-          <div>
-            <InputField
-              placeholder="Confirm Password"
-              type="password"
-              width="100%"
-              className="mb-5 mt-1"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              onKeyDown={handleKeyDown}
-              id={"confirm_password"}
-              labelName={"Confirm Password"}
-              compulsory={true}
-            />
-          </div>
-          
-          <CustomMainButton
-            text="Reset Password"
-            variant="primary"
-            width="100%"
-            className="mb-4"
-            onClick={handleReset}
-          />
+          </form>
         </RoundedDiv>
       </div>
     </ResetLayout>
