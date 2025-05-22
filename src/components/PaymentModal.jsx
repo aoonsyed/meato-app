@@ -200,16 +200,7 @@ function PaymentModal({ isOpen, onClose, onSavePayment }) {
                       labelClassName="text-sm font-medium"
                       maxLength={5}
                       value={value || ''}
-                      onChange={(e) => {
-                        const raw = e.target.value.replace(/\D/g, '');
-                        let formatted = '';
-                        if (raw.length <= 2) {
-                          formatted = raw;
-                        } else {
-                          formatted = raw.slice(0, 2) + '/' + raw.slice(2, 4);
-                        }
-                        onChange(formatted); // properly update form state
-                      }}
+                      onChange={handleExpiryChange}
                     />
                   )}
                 />
