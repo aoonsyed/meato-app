@@ -183,7 +183,7 @@ function SellWithUsPge() {
               <label
                 htmlFor='phoneNumber'
                 className='text-sm font-medium'>
-                Phone Number <span className='text-red-500'>*</span>
+                Phone Number<span className='text-red-500'>*</span>
               </label>
               <Controller
                 name="phoneNumber"
@@ -245,7 +245,7 @@ function SellWithUsPge() {
           
           {/* City */}
           <div>
-            <label htmlFor='city' className='text-sm font-medium'>City <span className='text-red-500'>*</span></label>
+            <label htmlFor='city' className='text-sm font-medium'>City<span className='text-red-500'>*</span></label>
             <select 
               id="city" 
               {...register("city")}
@@ -266,7 +266,7 @@ function SellWithUsPge() {
           {/* Meat Types */}
           <div>
             <label className='text-sm font-medium'>
-              Meat Types You Sell <span className='text-red-500'>*</span>
+              Meat Types You Sell<span className='text-red-500'>*</span>
             </label>
             <div className="flex flex-wrap mt-2">
               {Object.keys(watchMeatTypes).map((type) => (
@@ -286,7 +286,7 @@ function SellWithUsPge() {
           {/* Message */}
           <div>
             <label htmlFor="message" className='text-sm font-medium'>
-              Message / About Your Shop <span className='text-red-500'>*</span>
+              Message / About Your Shop<span className='text-red-500'>*</span>
             </label>
             <textarea
               id="message"
@@ -302,7 +302,7 @@ function SellWithUsPge() {
           {/* Upload Photos */}
           <div>
             <label htmlFor="photos" className='text-sm font-medium'>
-              Upload Photos <span className='text-red-500'>*</span>
+              Upload Photos<span className='text-red-500'>*</span>
             </label>
             <div className={`mt-1 ${selectedFiles.length === 0 ? 'border-red-500' : ''}`}>
               <label className={`flex w-full px-4 transition bg-white border-2 ${selectedFiles.length === 0 && errors.meatTypes ? 'border-red-500' : 'border-gray-300'} rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none flex-wrap h-auto`}>

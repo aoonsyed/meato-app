@@ -3,7 +3,7 @@ import Modal from './Modal';
 import Custom_Main_Button from './Custom_Main_Button';
 import InputField from "./InputField";
 import { toast } from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { cardPaymentSchema } from '../utils/validationSchemas';
 
@@ -16,6 +16,7 @@ function PaymentModal({ isOpen, onClose, onSavePayment }) {
     handleSubmit, 
     formState: { errors },
     setValue,
+    control,
     watch
   } = useForm({
     resolver: yupResolver(cardPaymentSchema),
@@ -46,23 +47,36 @@ function PaymentModal({ isOpen, onClose, onSavePayment }) {
   // Handle expiry date input (format and restrict)
   const handleExpiryChange = (e) => {
     const value = e.target.value;
-    let formattedValue = value.replace(/\D/g, '');
+    // Remove all non-numeric characters
+    const numericInput = value.replace(/\D/g, '');
     
-    if (formattedValue.length > 0) {
-      if (formattedValue.length > 2) {
-        formattedValue = formattedValue.substring(0, 2) + '/' + formattedValue.substring(2, 4);
+    let formattedValue = '';
+    
+    // Format as MM/YY
+    if (numericInput.length > 0) {
+      // Handle first digit of month (can only be 0 or 1)
+      if (numericInput[0] > 1) {
+        formattedValue = '0' + numericInput[0];
+      } else {
+        formattedValue = numericInput[0];
       }
       
-      if (formattedValue.length >= 2) {
-        const month = parseInt(formattedValue.substring(0, 2), 10);
-        if (month < 1) {
-          formattedValue = '01' + formattedValue.substring(2);
-        } else if (month > 12) {
-          formattedValue = '12' + formattedValue.substring(2);
+      // Handle second digit of month (if first digit is 1, second can only be 0-2)
+      if (numericInput.length > 1) {
+        if (formattedValue === '1' && numericInput[1] > 2) {
+          formattedValue += '2';
+        } else {
+          formattedValue += numericInput[1];
         }
+      }
+      
+      // Add slash after month
+      if (numericInput.length > 2) {
+        formattedValue = formattedValue.substring(0, 2) + '/' + numericInput.substring(2);
       }
     }
     
+    // Limit to MM/YY format (5 characters)
     if (formattedValue.length <= 5) {
       setValue('expiry', formattedValue, { shouldValidate: true });
     }
@@ -171,20 +185,37 @@ function PaymentModal({ isOpen, onClose, onSavePayment }) {
               </div>
 
               <div>
-                <InputField 
-                  placeholder="MM/YY"
-                  type="text"
-                  labelName="Expiry"
-                  compulsory={true}
-                  id="expiry"
-                  variant={errors.expiry ? 'red' : 'grey'}
-                  className={`!p-4 md:!p-5 my-0.5 ${errors.expiry ? 'border-red-500' : ''}`}
-                  labelClassName="text-sm font-medium"
-                  value={cardValues.expiry || ''}
-                  onChange={handleExpiryChange}
-                  {...register('expiry')}
+                <Controller
+                  name="expiry"
+                  control={control}
+                  render={({ field: { onChange, value }, fieldState: { error } }) => (
+                    <InputField
+                      placeholder="MM/YY"
+                      type="text"
+                      labelName="Expiry"
+                      compulsory={true}
+                      id="expiry"
+                      variant={error ? 'red' : 'grey'}
+                      className={`!p-4 md:!p-5 my-0.5 ${error ? 'border-red-500' : ''}`}
+                      labelClassName="text-sm font-medium"
+                      maxLength={5}
+                      value={value || ''}
+                      onChange={(e) => {
+                        const raw = e.target.value.replace(/\D/g, '');
+                        let formatted = '';
+                        if (raw.length <= 2) {
+                          formatted = raw;
+                        } else {
+                          formatted = raw.slice(0, 2) + '/' + raw.slice(2, 4);
+                        }
+                        onChange(formatted); // properly update form state
+                      }}
+                    />
+                  )}
                 />
-                {errors.expiry && <p className="text-red-500 text-xs mt-1">{errors.expiry.message}</p>}
+                {errors.expiry && (
+                  <p className="text-red-500 text-xs mt-1">{errors.expiry.message}</p>
+)}
               </div>
             </div>
           </div>

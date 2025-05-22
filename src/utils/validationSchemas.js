@@ -78,7 +78,7 @@ export const cardPaymentSchema = yup.object({
     .string()
     .required('Expiry date is required')
     .matches(/^\d{2}\/\d{2}$/, 'Expiry date must be in MM/YY format')
-    .test('is-valid-expiry', 'Card has expired', function(value) {
+    .test('is-valid-expiry', 'Card is invalid.', function(value) {
       if (!value) return false;
       
       const [month, year] = value.split('/').map(num => parseInt(num, 10));
@@ -111,7 +111,7 @@ export const profileSchema = yup.object({
   city: yup.string().required('City is required'),
   area: yup.string().required('Area is required'),
   address: yup.string().required('Address is required'),
-  password: yup.string().notRequired(),
+  password: passwordSchema,
 }).required();
 
 // Delivery form validation schema

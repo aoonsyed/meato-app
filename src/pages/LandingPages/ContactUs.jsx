@@ -30,7 +30,7 @@ function ContactUs() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between py-10 px-4 md:px-10 lg:px-20 min-h-screen max-w-7xl mx-auto pt-10 md:pt-0 md:h-screen">
+    <div className="flex flex-col md:flex-row items-start justify-between py-6 md:py-10 px-4 md:px-10 lg:px-20 min-h-screen max-w-7xl mx-auto pt-24 md:pt-20 gap-8 md:gap-4">
 
       <div className='fixed inset-0 w-full h-full bg-center -z-10'
                   style={{ 
@@ -43,52 +43,52 @@ function ContactUs() {
       </div>
 
       {/* Left Section: Contact Information */}
-      <div className="flex flex-col items-start justify-evenly w-full md:w-1/2 pr-0 md:pr-8 mb-8 md:mb-0 h-auto text-white">
-        <div className='my-5'>
-          <h1 className="text-4xl font-bold mb-6">Get In Touch</h1>
-          <p className="mb-8 font-semibold text-2xl">Contact us if you have more questions.</p>
+      <div className="flex flex-col items-start justify-start w-full md:w-1/2 pr-0 md:pr-8 mb-4 md:mb-0 text-white">
+        <div className='mb-5 md:mb-8'>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 md:mb-6">Get In Touch</h1>
+          <p className="mb-4 md:mb-8 font-semibold text-xl md:text-2xl">Contact us if you have more questions.</p>
         </div>
 
-        <div className="flex flex-col gap-6 w-full">
-          <div className="flex items-center gap-4">
-            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
-              <FaEnvelope className="text-white text-xl" />
+        <div className="flex flex-col gap-4 md:gap-6 w-full">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="bg-red-700 rounded-md p-2 md:p-3 flex items-center justify-center min-w-12 md:min-w-16 h-12 md:h-16">
+              <FaEnvelope className="text-white text-lg md:text-xl" />
             </div>
             <div>
-              <p className="font-semibold text-xl">Email</p>
-              <p className="font-medium">meatexpert@gmail.com</p>
+              <p className="font-semibold text-lg md:text-xl">Email</p>
+              <p className="font-medium text-sm md:text-base">meatexpert@gmail.com</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
-              <FaWhatsapp className="text-white text-xl" />
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="bg-red-700 rounded-md p-2 md:p-3 flex items-center justify-center min-w-12 md:min-w-16 h-12 md:h-16">
+              <FaWhatsapp className="text-white text-lg md:text-xl" />
             </div>
             <div>
-              <p className="font-semibold text-xl">Messages</p>
-              <p className="font-medium">Send us a message on WhatsApp:</p>
-              <p className="font-medium">+12345678910</p>
+              <p className="font-semibold text-lg md:text-xl">Messages</p>
+              <p className="font-medium text-sm md:text-base">Send us a message on WhatsApp:</p>
+              <p className="font-medium text-sm md:text-base">+12345678910</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
-              <FaPhone className="text-white text-xl" />
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="bg-red-700 rounded-md p-2 md:p-3 flex items-center justify-center min-w-12 md:min-w-16 h-12 md:h-16">
+              <FaPhone className="text-white text-lg md:text-xl" />
             </div>
             <div>
-              <p className="font-semibold text-xl">Phone</p>
-              <p className="font-medium">+12345678910</p>
+              <p className="font-semibold text-lg md:text-xl">Phone</p>
+              <p className="font-medium text-sm md:text-base">+12345678910</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="bg-red-700 rounded-md p-3 flex items-center justify-center min-w-16 h-16">
-              <FaMapMarkerAlt className="text-white text-xl" />
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="bg-red-700 rounded-md p-2 md:p-3 flex items-center justify-center min-w-12 md:min-w-16 h-12 md:h-16">
+              <FaMapMarkerAlt className="text-white text-lg md:text-xl" />
             </div>
             <div>
-              <p className="font-semibold text-xl">Address</p>
-              <p className="font-medium">1234 Elm Street, Apt. 5B, Springfield, IL</p>
-              <p className="font-medium">62704, USA</p>
+              <p className="font-semibold text-lg md:text-xl">Address</p>
+              <p className="font-medium text-sm md:text-base">1234 Elm Street, Apt. 5B, Springfield, IL</p>
+              <p className="font-medium text-sm md:text-base">62704, USA</p>
             </div>
           </div>
         </div>
@@ -96,13 +96,13 @@ function ContactUs() {
 
       {/* Right Section: Form */}
       <RoundedDiv 
-        className="p-8 !w-full md:!w-1/2 shadow-lg bg-white"
+        className="p-4 sm:p-6 md:p-8 !w-full md:!w-1/2 shadow-lg bg-white mb-8"
         height="auto"
       >
-        <h1 className='font-bold text-center text-3xl mb-1'>Submit Your Query</h1>
-        <p className='font-normal text-center text-sm mb-6'>Ask anything and we will respond quickly</p>
+        <h1 className='font-bold text-center text-2xl md:text-3xl mb-1'>Submit Your Query</h1>
+        <p className='font-normal text-center text-xs sm:text-sm mb-4 md:mb-6'>Ask anything and we will respond quickly</p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 md:gap-5">
           <div>
             <InputField
               type="text"
@@ -158,16 +158,16 @@ function ContactUs() {
             <textarea
               id="message"
               placeholder="Write your message..."
-              className={`w-full border ${errors.message ? 'border-red-500' : 'border-gray-200'} rounded p-5 min-h-[120px] font-inter font-semibold shadow-[0_1px_2px_0_#1018280D] focus:border-black focus:outline-none`}
+              className={`w-full border ${errors.message ? 'border-red-500' : 'border-gray-200'} rounded p-3 md:p-5 min-h-[100px] md:min-h-[120px] font-inter font-semibold shadow-[0_1px_2px_0_#1018280D] focus:border-black focus:outline-none`}
               {...register('message')}
             />
             {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
           </div>
           
-          <div className="flex justify-between mt-4">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 mt-2 md:mt-4">
             <button 
               type="button" 
-              className="border border-[#FFB752] rounded-full py-2 px-8 text-[#AE1F25] font-semibold hover:bg-gray-50 cursor-pointer w-[45%]"
+              className="border border-[#FFB752] rounded-full py-2 px-6 md:px-8 text-[#AE1F25] font-semibold hover:bg-gray-50 cursor-pointer w-full sm:w-[45%] order-2 sm:order-1"
               onClick={() => reset()}
             >
               Cancel
@@ -175,8 +175,8 @@ function ContactUs() {
             
             <Custom_Main_Button
               type="submit"
-              className="bg-red-700 hover:bg-red-800 text-white py- px-8 rounded-full"
-              width='45%'
+              className="bg-red-700 hover:bg-red-800 text-white py-2 px-6 md:px-8 rounded-full order-1 sm:order-2"
+              width='100% sm:w-[45%]'
               text='Send'
             />
           </div>
