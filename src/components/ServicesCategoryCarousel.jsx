@@ -15,7 +15,7 @@ function ServicesCategoryCarousal({setSelectedCategory, prodRef}) {
 
    function handleCategoryClick(e) {
         // console.log(e);
-        setSelectedCategory(e.target.alt);
+        setSelectedCategory(e.target.title);
         prodRef.current.scrollIntoView({
             behavior: 'smooth',
             block: 'start',
