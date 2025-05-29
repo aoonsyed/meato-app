@@ -105,7 +105,7 @@ const HeaderComponent = () => {
             <NavLink to="/" className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Home</NavLink>
             <NavLink to="/about" className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>About Us</NavLink>
             <NavLink to="/services"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Services</NavLink>
-            <NavLink to="/sell"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Sell With Us</NavLink>
+            {/* <NavLink to="/sell"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Sell With Us</NavLink> */}
             <NavLink to="/news"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>News</NavLink>
             <NavLink to="/contact"  className={({isActive})=> `font-roboto font-semibold text-xl ${isActive? "border-b-4 text-[#AE1F25] border-[#AE1F25] leading-8 px-2": "text-white"} `}>Contact Us</NavLink>
           </div>
@@ -159,7 +159,7 @@ const HeaderComponent = () => {
                 <Link to="/" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Home</Link>
                 <Link to="/about" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>About Us</Link>
                 <Link to="/services" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Services</Link>
-                <Link to="/sell" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Sell With Us</Link>
+                {/* <Link to="/sell" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Sell With Us</Link> */}
                 <Link to="/news" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>News</Link>
                 <Link to="/contact" className="font-roboto font-medium text-white py-2" onClick={()=> setMobileMenuOpen(false)}>Contact Us</Link>
               </div>
